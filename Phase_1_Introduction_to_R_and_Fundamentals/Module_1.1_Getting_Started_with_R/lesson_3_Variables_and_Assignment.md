@@ -4,3 +4,258 @@
 * Assignment operators (`<-`, `=`).
 * Rules for naming variables.
 * Checking variable types and values.
+
+## **Phase 1: Introduction to R and Fundamentals**
+
+### **Module 1.1: Getting Started with R**
+
+---
+
+### **Lesson 3: Variables and Assignment**
+
+This lesson delves into one of the most fundamental concepts in any programming language: variables. You'll learn how to store data in R using variables, understand the different assignment operators, and explore naming conventions.
+
+---
+
+#### **Understanding Variables in R**
+
+In R, a **variable** is a name given to a memory location that stores data. Think of it as a named container for a value. When you create a variable, you're essentially reserving a space in your computer's memory and giving it a label so you can easily access and manipulate the data stored there.
+
+Variables are crucial for:
+
+* **Storing data:** Keeping numbers, text, or complex datasets accessible.
+* **Reusability:** Using the same data multiple times without re-typing it.
+* **Readability:** Giving meaningful names to data makes your code easier to understand.
+* **Manipulation:** Performing operations on stored data.
+
+---
+
+#### **Assignment Operators**
+
+R offers several ways to assign a value to a variable. The most commonly used and recommended is the **leftward assignment operator (`<-`)**.
+
+| Operator | Description                                   | Example         |
+| :------- | :-------------------------------------------- | :-------------- |
+| `<-`     | **Leftward Assignment:** Assigns value on right to object on left. **(Most common and recommended)** | `x <- 10`       |
+| `=`      | **Assignment:** Assigns value on right to object on left. (Also works, but `<-` is idiomatic R) | `y = 20`        |
+| `->`     | **Rightward Assignment:** Assigns value on left to object on right. (Less common) | `30 -> z`       |
+
+**Detailed Explanation:**
+
+* **`<-` (Leftward Assignment Operator):**
+    This is the traditional and preferred way to assign values in R. It clearly indicates that the value on the right is being "placed into" the variable on the left. It enhances code readability, especially when dealing with complex expressions.
+
+* **`=` (Assignment Operator):**
+    This operator also works for assignment in R, similar to many other programming languages. However, its use is generally discouraged in R for assignments within functions (where it's strictly for argument matching) to avoid ambiguity. For top-level assignments in scripts, it usually behaves the same as `<-`, but adopting `<-` is a good habit.
+
+* **`->` (Rightward Assignment Operator):**
+    This is less common but allows you to assign a value from the left to a variable on the right. It's sometimes used for chaining operations in a specific visual flow, but it's not as widely used as `<-`.
+
+**Code Snippets:**
+
+```r
+# Using the leftward assignment operator (<-) - Recommended
+my_number <- 10
+my_text <- "Hello R!"
+my_logical <- TRUE
+
+print(my_number)
+print(my_text)
+print(my_logical)
+
+# Using the equals sign assignment operator (=)
+another_number = 25
+another_text = "Learning R is fun!"
+another_logical = FALSE
+
+print(another_number)
+print(another_text)
+print(another_logical)
+
+# Using the rightward assignment operator (->) - Less common
+3.14 -> pi_approx
+"Data Science" -> my_field
+
+print(pi_approx)
+print(my_field)
+
+# You can also assign the result of an expression
+sum_val <- my_number + another_number
+print(sum_val)
+
+# Assigning a variable's value to another variable
+new_variable <- my_number
+print(new_variable)
+```
+
+**Output:**
+
+```bash
+[1] 10
+[1] "Hello R!"
+[1] TRUE
+[1] 25
+[1] "Learning R is fun!"
+[1] FALSE
+[1] 3.14
+[1] "Data Science"
+[1] 35
+[1] 10
+```
+
+**Key Point:** While `=` works for assignment, `<-` is considered the idiomatic and most explicit assignment operator in R. It avoids potential confusion with equality checks (`==`) and argument passing in function calls. Stick to `<-` for clarity and consistency.
+
+---
+
+#### **Rules for Naming Variables**
+
+Just like in human languages, there are rules and conventions for naming variables in R. Following these rules ensures your code is valid and readable.
+
+**Valid Naming Rules:**
+
+1. **Must start with a letter or a dot (`.`).** If it starts with a dot, the second character cannot be a digit.
+    * Valid: `my_variable`, `x`, `_data` (if dot is allowed), `.hidden_var`
+    * Invalid: `1variable`, `_1data` (if `.` is not allowed at beginning)
+2. **Can contain letters, numbers, and underscores (`_`) or dots (`.`).**
+    * Valid: `variable_name`, `var.name2`, `data_2023`
+3. **Are case-sensitive.** `myVar` is different from `myvar`.
+    * `my_value <- 10` and `My_Value <- 20` create two distinct variables.
+4. **Cannot be R's reserved keywords** (e.g., `if`, `else`, `for`, `function`, `TRUE`, `FALSE`, `NULL`, `NA`, `Inf`, `NaN`).
+5. **Should not be names of built-in functions** (e.g., `c`, `mean`, `sum`) to avoid shadowing them. While R allows this, it's a bad practice as it makes the built-in function temporarily unusable.
+
+**Common Naming Conventions (Style Guides):**
+
+While not strict rules, these conventions improve readability and are widely adopted:
+
+* **Snake Case (`snake_case`):** All lowercase, words separated by underscores. This is the preferred style in the `tidyverse` and is very common in R.
+  * Example: `customer_id`, `total_sales_2023`, `calculate_average_score`
+* **Camel Case (`camelCase`):** First word lowercase, subsequent words start with an uppercase letter. Less common in R, but prevalent in JavaScript and Java.
+  * Example: `customerId`, `totalSales2023`, `calculateAverageScore`
+* **Dot Case (`dot.case`):** Words separated by dots. Common in base R, but can sometimes be confused with S3 method dispatch or list element access.
+  * Example: `customer.id`, `total.sales.2023`, `calculate.average.score`
+
+**Code Snippets (Naming Examples):**
+
+```r
+# Valid variable names (snake_case is generally preferred)
+student_id <- 101
+exam_score_v1 <- 88.5
+is_passing_grade <- TRUE
+
+# Case sensitivity example
+temperature <- 25
+Temperature <- 30 # This is a different variable
+print(temperature)
+print(Temperature)
+
+# Invalid variable names (will cause errors)
+# 1st_quarter_sales <- 5000  # Error: Starts with a number
+# if <- "condition"          # Error: 'if' is a reserved keyword
+# my-data <- 100              # Error: '-' is an operator, not allowed in variable names
+
+# Avoiding shadowing built-in functions (bad practice, but R allows it)
+# DON'T DO THIS IN REAL CODE!
+c <- "This is now a character string, not the concatenate function"
+print(c) # R will print the string
+# c(1, 2, 3) # This will now produce an error because 'c' is no longer the function
+# To restore the function:
+# rm(c) # Removes the variable 'c'
+# print(c(1, 2, 3)) # Now the function works again
+```
+
+**Output:**
+
+```bash
+[1] 101
+[1] 88.5
+[1] TRUE
+[1] 25
+[1] 30
+[1] "This is now a character string, not the concatenate function"
+```
+
+**Key Points:**
+
+* Always use meaningful variable names that describe the data they hold.
+* Consistency in naming style (e.g., sticking to snake_case) across your project makes code much easier to read and maintain.
+* Avoid using reserved keywords or shadowing built-in function names.
+
+---
+
+#### **Checking Variable Types and Values**
+
+R provides several functions to inspect the type and value of variables.
+
+* `class()`: Returns the class (or type) of an object.
+* `typeof()`: Returns the type of storage of the object. For basic types, it often returns the same as `class()`.
+* `str()`: Displays the internal structure of an R object (very useful for complex objects like data frames).
+* `print()`: Displays the value of a variable.
+* `ls()`: Lists all objects in the current environment.
+* `rm()`: Removes objects from the environment.
+
+**Code Snippets:**
+
+```r
+# Create some variables
+my_integer <- 10L # L suffix makes it an integer
+my_double <- 25.5
+my_character <- "R Programming"
+my_logical <- TRUE
+
+# Check their classes
+print(class(my_integer))
+print(class(my_double))
+print(class(my_character))
+print(class(my_logical))
+
+# Check their internal storage types
+print(typeof(my_integer))
+print(typeof(my_double))
+print(typeof(my_character))
+print(typeof(my_logical))
+
+# Print their values
+print(my_integer)
+print(my_double)
+print(my_character)
+print(my_logical)
+
+# List objects in the environment
+print(ls())
+
+# Remove a variable
+rm(my_character)
+print(ls()) # my_character should be gone
+
+# Try to print a removed variable (will cause an error)
+# print(my_character) # Uncomment to see error
+
+# Clean up all variables (useful for starting fresh)
+# rm(list = ls())
+# print(ls()) # Should print character(0)
+```
+
+**Output:**
+
+```bash
+[1] "integer"
+[1] "numeric"
+[1] "character"
+[1] "logical"
+[1] "integer"
+[1] "double"
+[1] "character"
+[1] "logical"
+[1] 10
+[1] 25.5
+[1] "R Programming"
+[1] TRUE
+[1] "my_character" "my_double"    "my_integer"   "my_logical"
+[1] "my_double"  "my_integer" "my_logical"
+```
+
+---
+
+This lesson provided a comprehensive understanding of variables and assignment in R. You now know how to store data, the best practices for assignment and naming, and how to inspect your variables. This knowledge is foundational for working with R's various data structures, which we will explore in the next module.
+
+```

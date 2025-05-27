@@ -4,3 +4,231 @@
 * Brief overview of the R ecosystem.
 * Installing R and RStudio on your system.
 * Tour of the RStudio Interface: Console, Script Editor, Environment, Files/Plots/Packages/Help panes.
+
+You are absolutely right! My apologies for missing that crucial formatting. Wrapping the lesson content in `md` blocks will make it much clearer where each file's content begins and ends for easy copying.
+
+Let me regenerate the content for **Lesson 1: What is R and RStudio?** with the `md` delimiters as requested.
+
+---
+
+```md
+# Lesson 1: What is R and RStudio?
+
+This lesson introduces you to the R programming language and RStudio, the most popular Integrated Development Environment (IDE) for R. Understanding these foundational tools is crucial for any aspiring R user.
+
+---
+
+#### **What is R?**
+
+R is a powerful open-source programming language and software environment specifically designed for statistical computing and graphics. It's widely used by statisticians, data analysts, researchers, and data scientists across various industries.
+
+**Key Characteristics of R:**
+
+* **Open Source and Free:** R is freely available under the GNU General Public License, meaning anyone can use, distribute, and modify it. This fosters a vibrant community and a wealth of freely available packages.
+* **Statistical Computing:** R provides a wide array of statistical (linear and nonlinear modeling, classical statistical tests, time-series analysis, classification, clustering, etc.) and graphical techniques.
+* **Extensible:** The core functionality of R can be significantly extended through **packages**. There are over 20,000 packages available on CRAN (Comprehensive R Archive Network) covering virtually every aspect of data analysis.
+* **Cross-Platform:** R runs on various operating systems including Windows, macOS, and Linux.
+* **Vectorized Operations:** R excels at performing operations on entire vectors or matrices at once, which makes code more concise and often more efficient than traditional looping in other languages.
+* **High-Quality Graphics:** R is renowned for its capabilities in creating sophisticated and aesthetically pleasing static and interactive data visualizations.
+
+---
+
+#### **Why Use R for Data Science?**
+
+* **Strong Statistical Foundation:** R was built by statisticians, making it inherently strong for statistical analysis and modeling.
+* **Cutting-Edge Research:** Many new statistical and machine learning methods are first implemented in R packages.
+* **Reproducibility:** R Markdown allows you to combine code, output, and prose into high-quality reports, facilitating reproducible research.
+* **Vibrant Community:** A large and active community means extensive support, tutorials, and ready-to-use solutions.
+* **Visualization Power:** Packages like `ggplot2` allow for highly customized and publication-quality graphics.
+
+---
+
+#### **What is RStudio?**
+
+While R is the *language* and the *engine*, RStudio is an Integrated Development Environment (IDE) that provides a user-friendly interface for working with R. Think of it as a control center that makes writing, executing, and debugging R code much easier and more efficient. While you can use R without RStudio, it's highly recommended for a smoother and more productive workflow.
+
+**Key Features of RStudio:**
+
+* **Console:** Where R commands are executed and output is displayed.
+* **Source Editor:** For writing and saving R scripts, R Markdown documents, and other files.
+* **Environment Pane:** Shows all objects (variables, data frames, functions) currently loaded in your R session.
+* **Files/Plots/Packages/Help/Viewer Panes:**
+    * **Files:** Navigates your file system.
+    * **Plots:** Displays generated graphics.
+    * **Packages:** Manages installed and loaded R packages.
+    * **Help:** Accesses R's documentation and package help files.
+    * **Viewer:** Displays local web content, often used for interactive plots or Shiny apps.
+* **Project Management:** Helps organize your work into self-contained projects, ensuring reproducibility.
+* **Debugging Tools:** Features that help you identify and fix errors in your code.
+
+---
+
+#### **Installing R and RStudio**
+
+The first step to using R is to install both R and RStudio. It's crucial to install **R first**, and then **RStudio**.
+
+**1. Install R:**
+
+* Go to the official CRAN (Comprehensive R Archive Network) website: [https://cran.r-project.org/](https://cran.r-project.org/)
+* Select the download link for your operating system (Windows, macOS, Linux).
+* Follow the installation instructions for your specific OS. For Windows, download the base distribution and run the installer. For macOS, download the latest package. For Linux, follow the instructions for your distribution.
+
+**2. Install RStudio Desktop:**
+
+* Go to the RStudio download page: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/) (Posit is the company behind RStudio).
+* Scroll down to the "RStudio Desktop" section and choose the **Free** version.
+* Select the installer appropriate for your operating system.
+* Run the RStudio installer and follow the on-screen prompts.
+
+---
+
+#### **RStudio Interface Tour: A First Look**
+
+Once R and RStudio are installed, open RStudio. You'll typically see a layout divided into four main panes (though you can customize this).
+
+Let's briefly tour the default layout:
+
+1.  **Top-Left Pane: Source Editor (or Script Editor)**
+    * This is where you write your R code. You'll save these as `.R` files.
+    * You can execute lines of code from here by placing your cursor on the line and pressing `Ctrl + Enter` (Windows/Linux) or `Cmd + Enter` (macOS).
+    * You can also execute an entire script by selecting all lines and pressing `Ctrl + Enter`/`Cmd + Enter`, or by clicking the "Run" button in the toolbar.
+
+2.  **Bottom-Left Pane: Console**
+    * This is where R commands are executed directly and their results are displayed.
+    * You can type commands directly into the console prompt (`>`) and press `Enter` to execute them.
+    * Output from scripts run from the Source Editor will also appear here.
+
+3.  **Top-Right Pane: Environment / History / Connections / Tutorial**
+    * **Environment:** This tab displays all the objects (variables, data frames, functions) you have created or loaded in your current R session. It's very useful for keeping track of your data.
+    * **History:** Shows a record of all the commands you've executed in the console.
+    * **Connections:** Used for connecting to various data sources like databases.
+    * **Tutorial:** If you have learnedr packages installed, you can access interactive tutorials here.
+
+4.  **Bottom-Right Pane: Files / Plots / Packages / Help / Viewer**
+    * **Files:** A file browser that allows you to navigate your directories, open files, and create new ones.
+    * **Plots:** Where all your generated R graphics (charts, plots) will appear. You can export or zoom into them here.
+    * **Packages:** Lists all installed R packages. You can install new packages, update existing ones, and load/unload them from here.
+    * **Help:** Provides access to R's extensive documentation. You can search for function help, package documentation, and more.
+    * **Viewer:** Displays local web content, often used for interactive visualizations created with packages like `plotly` or for local Shiny applications.
+
+---
+
+#### **Basic R as a Calculator**
+
+Let's start by using R for simple arithmetic operations directly in the **Console**. This is the simplest way to interact with R.
+
+**Code Snippets (R Console):**
+
+```R
+# Addition
+2 + 3
+
+# Subtraction
+10 - 4
+
+# Multiplication
+5 * 6
+
+# Division
+12 / 3
+
+# Exponentiation (power)
+2^4
+5**2 # Alternative for exponentiation
+
+# Modulus (remainder after division)
+10 %% 3
+
+# Integer Division (quotient, discards remainder)
+10 %/% 3
+```
+
+**Output:**
+
+```bash
+> 2 + 3
+[1] 5
+> 10 - 4
+[1] 6
+> 5 * 6
+[1] 30
+> 12 / 3
+[1] 4
+> 2^4
+[1] 16
+> 5**2
+[1] 25
+> 10 %% 3
+[1] 1
+> 10 %/% 3
+[1] 3
+```
+
+**Key Points:**
+
+* The `>` symbol in the console indicates that R is ready for a command.
+* `[1]` before the output indicates that it's the first element of a vector. You'll learn more about vectors in the next module.
+* Lines starting with `#` are **comments** and are ignored by R. Use them to explain your code!
+
+---
+
+## **Creating and Running R Scripts**
+
+While typing directly in the console is fine for quick calculations, for any serious work, you'll want to write your code in an R Script (`.R` file). This allows you to save your work, run multiple lines of code together, and keep your analysis organized and reproducible.
+
+**Steps:**
+
+1. **Open a New R Script:**
+    * In RStudio, go to `File > New File > R Script`.
+    * This will open a blank Source Editor pane (usually top-left).
+
+2. **Write Your Code:**
+    * Type or paste the following R code into the new script:
+
+    ```R
+    # This is my first R script!
+
+    # Calculate the area of a rectangle
+    length <- 15
+    width <- 7
+    area <- length * width
+    print(area)
+
+    # Calculate the circumference of a circle
+    radius <- 5
+    pi_value <- 3.14159
+    circumference <- 2 * pi_value * radius
+    print(circumference)
+    ```
+
+    * **Note on `<-`:** This is the most common assignment operator in R (reads as "gets"). It assigns the value on the right to the variable on the left. You can also use `=`, but `<-` is generally preferred for assignment.
+    * **Note on `print()`:** The `print()` function explicitly displays the value of a variable or result. In the console, R automatically prints the last unassigned expression, but in scripts, `print()` ensures output.
+
+3. **Save the Script:**
+    * Go to `File > Save As...`
+    * Choose a location and name it something descriptive, like `my_first_script.R`. Make sure it ends with `.R`.
+
+4. **Run the Script:**
+    * **Run line by line:** Place your cursor on a line and press `Ctrl + Enter` (Windows/Linux) or `Cmd + Enter` (macOS). The line will be sent to the console and executed.
+    * **Run selected lines:** Highlight a block of code and press `Ctrl + Enter` (Windows/Linux) or `Cmd + Enter` (macOS).
+    * **Run entire script:** Click the "Run" button in the Source Editor toolbar (it looks like a small green arrow) or press `Ctrl + Shift + S` (Windows/Linux) / `Cmd + Shift + S` (macOS) to "Source" the file.
+
+**Expected Output in the Console:**
+
+```bash
+> # This is my first R script!
+>
+> # Calculate the area of a rectangle
+> length <- 15
+> width <- 7
+> area <- length * width
+> print(area)
+[1] 105
+>
+> # Calculate the circumference of a circle
+> radius <- 5
+> pi_value <- 3.14159
+> circumference <- 2 * pi_value * radius
+> print(circumference)
+[1] 31.4159
+```

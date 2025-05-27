@@ -4,3 +4,486 @@
 * Creating lists (`list()`).
 * Accessing list elements using `[]`, `[[]]`, and `$`.
 * Nested lists.
+**Module 1.2: Data Types and Structures**.
+
+Lists are incredibly versatile in R, as they allow you to store collections of objects of *different* types, unlike atomic vectors and matrices/arrays. This makes them a powerful tool for organizing various pieces of information.
+
+---
+
+## **Phase 1: Introduction to R and Fundamentals**
+
+### **Module 1.2: Data Types and Structures**
+
+---
+
+### **Lesson 3: Lists**
+
+This lesson introduces **lists**, a highly flexible data structure in R. Unlike atomic vectors, matrices, or arrays, lists can hold objects of *different* data types and even different structures (e.g., a list can contain a numeric vector, a character string, a logical value, and even another list or a data frame). This makes them incredibly useful for organizing complex data.
+
+---
+
+#### **Understanding Lists: Heterogeneous Data Containers**
+
+A **list** in R is an ordered collection of objects. The key characteristic of a list is its **heterogeneity**: each element (or component) of a list can be a different type of R object – it could be an atomic vector, a matrix, a data frame, a function, or even another list.
+
+Think of a list as a generic container that can hold various items, each potentially unique in its form and content.
+
+**Key Characteristics of Lists:**
+
+* **Heterogeneous:** Can store elements of different data types (numeric, character, logical, etc.) and different R object types (vectors, matrices, data frames, other lists, functions, etc.).
+* **Ordered:** Elements are stored in a specific order and can be accessed by their position.
+* **Named or Unnamed:** Elements can be named, which greatly improves readability and access.
+
+---
+
+#### **Creating Lists**
+
+The primary function to create a list in R is `list()`.
+
+**Syntax:**
+
+```R
+list(element1, element2, ..., elementN)
+```
+
+**Parameters:**
+
+* `element1, element2, ...`: The objects you want to include as components of the list. These can be any R objects.
+
+**Return Value:**
+
+* A list object.
+
+**Code Snippets:**
+
+```r
+# Create a simple list with unnamed elements
+my_first_list <- list("apple", 10, TRUE)
+print("My First List (unnamed):")
+print(my_first_list)
+
+# Create a list with named elements (recommended for clarity)
+student_info <- list(
+    name = "Alice Smith",
+    age = 21,
+    is_enrolled = TRUE,
+    grades = c(85, 92, 78, 95), # A numeric vector
+    course_matrix = matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE) # A matrix
+)
+print("Student Info List (named):")
+print(student_info)
+
+# Create a nested list (a list within a list)
+nested_list_example <- list(
+    item1 = "First item",
+    sub_list = list(
+        sub_item1 = 100,
+        sub_item2 = "nested text"
+    ),
+    item3 = FALSE
+)
+print("Nested List Example:")
+print(nested_list_example)
+
+# Check the class of a list
+print(class(student_info))
+```
+
+**Output:**
+
+```
+[1] "My First List (unnamed):"
+[[1]]
+[1] "apple"
+
+[[2]]
+[1] 10
+
+[[3]]
+[1] TRUE
+
+[1] "Student Info List (named):"
+$name
+[1] "Alice Smith"
+
+$age
+[1] 21
+
+$is_enrolled
+[1] TRUE
+
+$grades
+[1] 85 92 78 95
+
+$course_matrix
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+
+[1] "Nested List Example:"
+$item1
+[1] "First item"
+
+$sub_list
+$sub_list$sub_item1
+[1] 100
+
+$sub_list$sub_item2
+[1] "nested text"
+
+
+$item3
+[1] FALSE
+
+[1] "list"
+```
+
+**Key Points:**
+
+* Lists are printed with double square brackets `[[n]]` indicating the *n*th component, followed by its contents. If components are named, the name `$name` precedes the content.
+* Naming list elements is highly recommended as it makes your code more readable and allows for easier access.
+
+---
+
+#### **Accessing List Elements**
+
+Accessing elements in a list is a bit more nuanced than vectors or matrices due to their heterogeneous nature. R provides three main ways to access list components:
+
+1.  **Single Square Brackets (`[]`):** Returns a *new list* containing the selected elements.
+    * Useful when you want to subset the list itself, keeping its list structure.
+2.  **Double Square Brackets (`[[]]`):** Returns the *content* of a single element (the actual object, not a list containing it).
+    * Used to extract the actual data stored within a specific list component.
+3.  **Dollar Sign (`$`):** Extracts the content of a named list element by its name.
+    * Most convenient for accessing named list elements.
+
+**Code Snippets:**
+
+```r
+student_data <- list(
+    name = "Bob Johnson",
+    id = 1056,
+    scores = c(75, 80, 88),
+    address = list(
+        street = "123 Main St",
+        city = "Anytown",
+        zip = "12345"
+    ),
+    is_active = TRUE
+)
+print("Original Student Data List:")
+print(student_data)
+
+# 1. Accessing with Single Square Brackets `[]` (returns a list)
+print("Accessing 'name' element as a list:")
+print(student_data["name"])
+print(class(student_data["name"])) # Still a list
+
+print("Accessing 'name' and 'id' elements as a new list:")
+print(student_data[c("name", "id")])
+
+# 2. Accessing with Double Square Brackets `[[]]` (returns the element's content)
+print("Accessing 'name' element content:")
+print(student_data[["name"]])
+print(class(student_data[["name"]])) # Returns the character vector
+
+print("Accessing 'id' element content by position:")
+print(student_data[[2]]) # id is the second element
+print(class(student_data[[2]]))
+
+# 3. Accessing with Dollar Sign `$` (returns the element's content by name)
+print("Accessing 'scores' element content using $:")
+print(student_data$scores)
+print(class(student_data$scores))
+
+print("Accessing 'is_active' element content using $:")
+print(student_data$is_active)
+
+# Accessing elements within a nested list
+print("Accessing 'city' from nested 'address' list:")
+print(student_data$address$city)
+print(student_data[["address"]][["city"]]) # Alternative using double brackets
+
+# Modifying list elements
+student_data$age <- 22 # Add a new element or modify existing
+student_data$scores[1] <- 78 # Modify an element within a list component
+print("Student Data after modifications:")
+print(student_data)
+
+# Adding a new element to a list
+student_data$major <- "Computer Science"
+print("Student Data after adding 'major':")
+print(student_data)
+
+# Removing an element from a list
+student_data$is_active <- NULL
+print("Student Data after removing 'is_active':")
+print(student_data)
+```
+
+**Output:**
+
+```
+[1] "Original Student Data List:"
+$name
+[1] "Bob Johnson"
+
+$id
+[1] 1056
+
+$scores
+[1] 75 80 88
+
+$address
+$address$street
+[1] "123 Main St"
+
+$address$city
+[1] "Anytown"
+
+$address$zip
+[1] "12345"
+
+
+$is_active
+[1] TRUE
+
+[1] "Accessing 'name' element as a list:"
+$name
+[1] "Bob Johnson"
+
+[1] "list"
+[1] "Accessing 'name' and 'id' elements as a new list:"
+$name
+[1] "Bob Johnson"
+
+$id
+[1] 1056
+
+[1] "Accessing 'name' element content:"
+[1] "Bob Johnson"
+[1] "character"
+[1] "Accessing 'id' element content by position:"
+[1] 1056
+[1] "numeric"
+[1] "Accessing 'scores' element content using $:"
+[1] 75 80 88
+[1] "numeric"
+[1] "Accessing 'is_active' element content using $:"
+[1] TRUE
+[1] "Accessing 'city' from nested 'address' list:"
+[1] "Anytown"
+[1] "Student Data after modifications:"
+$name
+[1] "Bob Johnson"
+
+$id
+[1] 1056
+
+$scores
+[1] 78 80 88
+
+$address
+$address$street
+[1] "123 Main St"
+
+$address$city
+[1] "Anytown"
+
+$address$zip
+[1] "12345"
+
+
+$is_active
+[1] TRUE
+
+$age
+[1] 22
+
+[1] "Student Data after adding 'major':"
+$name
+[1] "Bob Johnson"
+
+$id
+[1] 1056
+
+$scores
+[1] 78 80 88
+
+$address
+$address$street
+[1] "123 Main St"
+
+$address$city
+[1] "Anytown"
+
+$address$zip
+[1] "12345"
+
+
+$is_active
+[1] TRUE
+
+$age
+[1] 22
+
+$major
+[1] "Computer Science"
+
+[1] "Student Data after removing 'is_active':"
+$name
+[1] "Bob Johnson"
+
+$id
+[1] 1056
+
+$scores
+[1] 78 80 88
+
+$address
+$address$street
+[1] "123 Main St"
+
+$address$city
+[1] "Anytown"
+
+$address$zip
+[1] "12345"
+
+
+$age
+[1] 22
+
+$major
+[1] "Computer Science"
+```
+
+**Key Points:**
+
+* Use `[[]]` or `$` when you want to work *directly* with the object inside a list component (e.g., performing calculations on a numeric vector stored in a list).
+* Use `[]` when you want to keep the list structure, for instance, when selecting multiple components or for subsetting.
+* Lists are dynamic; you can add, modify, or remove elements after creation.
+
+---
+
+#### **Useful List Functions**
+
+Several functions help you work with lists:
+
+* `length()`: Returns the number of top-level elements in a list.
+* `names()`: Returns or sets the names of list elements.
+* `str()`: (Structure) Provides a compact, informative display of an R object's internal structure. Incredibly useful for lists.
+* `unlist()`: Converts a list to an atomic vector. This will coerce all elements to a common data type.
+* `as.list()`: Converts other R objects (like vectors) into lists.
+
+**Code Snippets:**
+
+```r
+my_complex_list <- list(
+    fruits = c("apple", "banana", "orange"),
+    numbers = 1:5,
+    matrix_data = matrix(c(1, 2, 3, 4), nrow = 2),
+    is_ready = TRUE,
+    nested = list(a = 1, b = "hello")
+)
+
+print("Original Complex List:")
+print(my_complex_list)
+
+# Get the number of top-level elements
+print("Number of elements in list:")
+print(length(my_complex_list))
+
+# Get names of elements
+print("Names of list elements:")
+print(names(my_complex_list))
+
+# Set or change names (can do this during creation or afterwards)
+names(my_complex_list)[1] <- "fruits_list" # Change name of first element
+print("List names after change:")
+print(names(my_complex_list))
+
+# Use str() to inspect structure (highly recommended!)
+print("Structure of the list (str()):")
+str(my_complex_list)
+
+# Unlist a list (all elements will be coerced to a common type)
+unlisted_data <- unlist(my_complex_list)
+print("Unlisted data (all coerced to character):")
+print(unlisted_data)
+print(class(unlisted_data))
+
+# Convert a vector to a list
+vector_to_list <- as.list(c(10, 20, 30))
+print("Vector converted to list:")
+print(vector_to_list)
+print(class(vector_to_list))
+```
+
+**Output:**
+
+```
+[1] "Original Complex List:"
+$fruits
+[1] "apple"  "banana" "orange"
+
+$numbers
+[1] 1 2 3 4 5
+
+$matrix_data
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+
+$is_ready
+[1] TRUE
+
+$nested
+$nested$a
+[1] 1
+
+$nested$b
+[1] "hello"
+
+[1] "Number of elements in list:"
+[1] 5
+[1] "Names of list elements:"
+[1] "fruits"      "numbers"     "matrix_data" "is_ready"    "nested"
+[1] "List names after change:"
+[1] "fruits_list" "numbers"     "matrix_data" "is_ready"    "nested"
+[1] "Structure of the list (str()):"
+List of 5
+ $ fruits_list: chr [1:3] "apple" "banana" "orange"
+ $ numbers    : int [1:5] 1 2 3 4 5
+ $ matrix_data: num [1:2, 1:2] 1 2 3 4
+ $ is_ready   : logi TRUE
+ $ nested     :List of 2
+  ..$ a: num 1
+  ..$ b: chr "hello"
+[1] "Unlisted data (all coerced to character):"
+     fruits_list1      fruits_list2      fruits_list3          numbers1
+          "apple"         "banana"         "orange"              "1"
+         numbers2          numbers3          numbers4          numbers5
+              "2"               "3"               "4"               "5"
+    matrix_data11     matrix_data21     matrix_data12     matrix_data22
+              "1"               "2"               "3"               "4"
+         is_ready         nested.a         nested.b
+             "TRUE"              "1"          "hello"
+[1] "character"
+[1] "Vector converted to list:"
+[[1]]
+[1] 10
+
+[[2]]
+[1] 20
+
+[[3]]
+[1] 30
+
+[1] "list"
+```
+
+---
+
+This lesson provided a thorough understanding of lists, their creation, and the crucial methods for accessing and manipulating their elements. Their flexibility makes them invaluable for storing complex and mixed-type data in R.
+
+**Next, we will delve into Lesson 4: Data Frames.**

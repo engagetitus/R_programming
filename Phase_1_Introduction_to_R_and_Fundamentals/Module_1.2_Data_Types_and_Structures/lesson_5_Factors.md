@@ -1,0 +1,326 @@
+# **Phase 1: Introduction to R and Fundamentals**
+
+## **Module 1.2: Data Types and Structures**
+
+---
+
+### **Lesson 5: Factors**
+
+This lesson introduces **factors**, a crucial data type in R used to represent categorical data. Factors are fundamental for statistical modeling, plotting, and ensuring that R treats categorical variables correctly. You'll learn how to create, manipulate, and work with factors, including ordered and unordered categories.
+
+---
+
+#### **Understanding Factors: Categorical Data in R**
+
+A **factor** is a vector that can contain only pre-defined, distinct values called **levels**. They are essentially numeric vectors internally, but with labels (levels) attached to these numbers. This allows R to efficiently store and work with categorical variables, where values belong to a finite set of possibilities (e.g., "Male", "Female"; "High", "Medium", "Low"; "Red", "Green", "Blue").
+
+**Why use Factors?**
+
+* **Statistical Modeling:** R's statistical functions (like `lm()` for linear models) automatically treat factor variables appropriately (e.g., creating dummy variables).
+* **Data Integrity:** Factors restrict the values a variable can take, preventing typos or invalid entries.
+* **Ordered Categories:** Factors can be ordered, allowing you to define a hierarchy among categories (e.g., "Low" < "Medium" < "High").
+* **Plotting:** Many plotting functions in R automatically handle factors well, using their levels for axis labels and legends.
+
+---
+
+#### **Creating Factors**
+
+Factors are created using the `factor()` function.
+
+**Syntax:**
+
+```R
+factor(x = character(), levels, labels, ordered = FALSE, exclude = NA, ...)
+```
+
+**Parameters:**
+
+* `x`: A vector of data (usually character or numeric) that you want to convert into a factor.
+* `levels`: An optional vector specifying the unique categories (levels) of the factor. If not provided, `factor()` will determine the levels from the unique values in `x` and order them alphabetically by default.
+* `labels`: An optional vector of new names for the levels.
+* `ordered`: A logical value. If `TRUE`, the factor levels are treated as ordered (e.g., "Low" < "Medium" < "High"). If `FALSE` (default), the levels are unordered.
+* `exclude`: A vector of values to be excluded from the levels.
+
+**Return Value:**
+
+* A factor object.
+
+**Code Snippets:**
+
+```r
+# Create a simple unordered factor (default behavior)
+gender_data <- c("Male", "Female", "Male", "Female", "Male")
+gender_factor <- factor(gender_data)
+print("Gender Factor (unordered):")
+print(gender_factor)
+print(class(gender_factor))
+print(levels(gender_factor)) # Check the levels
+print(is.ordered(gender_factor)) # Check if ordered
+
+# Creating a factor with specified levels (and ordering)
+# This is useful if you have values not present in the data but are valid levels
+blood_type_data <- c("A", "O", "AB", "B", "O", "A")
+all_blood_types <- c("A", "B", "AB", "O") # Define the desired order of levels
+blood_type_factor <- factor(blood_type_data, levels = all_blood_types)
+print("Blood Type Factor (specified levels):")
+print(blood_type_factor)
+print(levels(blood_type_factor))
+
+# Creating an ORDERED factor
+# Example: Education levels
+education_data <- c("High School", "Bachelors", "Masters", "High School", "PhD", "Bachelors")
+education_levels_order <- c("High School", "Bachelors", "Masters", "PhD")
+education_factor <- factor(education_data, levels = education_levels_order, ordered = TRUE)
+print("Education Factor (ordered):")
+print(education_factor)
+print(levels(education_factor))
+print(is.ordered(education_factor))
+
+# Using labels to rename levels
+vote_status_data <- c(1, 0, 1, 1, 0)
+vote_status_factor <- factor(vote_status_data,
+                             levels = c(0, 1),
+                             labels = c("Not Voted", "Voted"))
+print("Vote Status Factor (with labels):")
+print(vote_status_factor)
+print(levels(vote_status_factor))
+
+# Effect of stringsAsFactors on data frames
+# Older R versions (pre 4.0) default to TRUE, newer to FALSE
+df_default_sfa <- data.frame(
+    Color = c("Red", "Blue", "Green", "Red"),
+    Value = c(10, 20, 30, 40)
+)
+print("Data frame with default stringsAsFactors (may be factor or character depending on R version):")
+print(class(df_default_sfa$Color))
+
+df_explicit_sfa <- data.frame(
+    Color = c("Red", "Blue", "Green", "Red"),
+    Value = c(10, 20, 30, 40),
+    stringsAsFactors = FALSE
+)
+print("Data frame with explicit stringsAsFactors = FALSE:")
+print(class(df_explicit_sfa$Color))
+
+df_explicit_factor <- data.frame(
+    Color = factor(c("Red", "Blue", "Green", "Red")), # Explicitly create factor
+    Value = c(10, 20, 30, 40)
+)
+print("Data frame with explicit factor column:")
+print(class(df_explicit_factor$Color))
+```
+
+**Output:**
+
+```
+[1] "Gender Factor (unordered):"
+[1] Male   Female Male   Female Male
+Levels: Female Male
+[1] "factor"
+[1] "Female" "Male"
+[1] FALSE
+[1] "Blood Type Factor (specified levels):"
+[1] A  O  AB B  O  A
+Levels: A B AB O
+[1] "A"  "B"  "AB" "O"
+[1] "Education Factor (ordered):"
+[1] High School Bachelors   Masters     High School PhD         Bachelors
+Levels: High School < Bachelors < Masters < PhD
+[1] TRUE
+[1] "Vote Status Factor (with labels):"
+[1] Voted     Not Voted Voted     Voted     Not Voted
+Levels: Not Voted Voted
+[1] "Not Voted" "Voted"
+[1] "Data frame with default stringsAsFactors (may be factor or character depending on R version):"
+[1] "factor" # or "character" depending on your R version (pre/post 4.0)
+[1] "Data frame with explicit stringsAsFactors = FALSE:"
+[1] "character"
+[1] "Data frame with explicit factor column:"
+[1] "factor"
+```
+
+**Key Points:**
+
+* By default, `factor()` orders levels alphabetically. Use the `levels` argument to control the order.
+* For ordinal (ordered) categorical data, set `ordered = TRUE`.
+* The `stringsAsFactors` argument in `data.frame()` and `read.csv()` is crucial. Be mindful of its default behavior in your R version. Explicitly setting it to `FALSE` is generally safer for character data unless you specifically need factors.
+
+---
+
+#### **Working with Factors: Accessing and Modifying Levels**
+
+Once you have a factor, you might need to access its levels, change them, or add new ones.
+
+**Code Snippets:**
+
+```r
+# Our ordered education factor from before
+education_factor <- factor(
+    c("High School", "Bachelors", "Masters", "High School", "PhD", "Bachelors"),
+    levels = c("High School", "Bachelors", "Masters", "PhD"),
+    ordered = TRUE
+)
+print("Original Education Factor:")
+print(education_factor)
+print(levels(education_factor))
+
+# Get the levels of a factor
+current_levels <- levels(education_factor)
+print("Current levels:")
+print(current_levels)
+
+# Changing the order of levels (for an ordered factor)
+# This will reorder the display and statistical interpretation without changing underlying data
+new_level_order <- c("PhD", "Masters", "Bachelors", "High School")
+education_factor_reordered <- factor(education_factor, levels = new_level_order, ordered = TRUE)
+print("Education Factor (reordered levels):")
+print(education_factor_reordered)
+print(levels(education_factor_reordered))
+
+# Renaming specific levels (useful for cleaning up data)
+# Method 1: Using `levels()` function directly
+satisfaction_factor <- factor(c("sat", "unsat", "neu", "sat"))
+print("Original Satisfaction Factor:")
+print(satisfaction_factor)
+levels(satisfaction_factor) <- c("Neutral", "Satisfied", "Unsatisfied") # Must match current levels order
+print("Satisfaction Factor (levels renamed):")
+print(satisfaction_factor)
+print(levels(satisfaction_factor))
+
+# Method 2: Using `recode()` from `dplyr` (more robust, part of tidyverse)
+# install.packages("dplyr") # Run if you don't have it
+# library(dplyr)
+# satisfaction_factor_recoded <- recode(satisfaction_factor,
+#                                       "Neutral" = "Neutral_Customer",
+#                                       "Satisfied" = "Happy_Customer",
+#                                       "Unsatisfied" = "Unhappy_Customer")
+# print("Satisfaction Factor (recoded with dplyr):")
+# print(satisfaction_factor_recoded)
+# print(levels(satisfaction_factor_recoded))
+
+
+# Adding a new level to an existing factor (important for future values)
+# You cannot directly add a value that is not a predefined level
+# For example, if you try to add "Associate" to education_factor:
+# education_factor[1] <- "Associate" # This will result in NA and a warning
+# print(education_factor)
+
+# To add a new level, you must first modify the `levels` attribute
+new_levels_for_education <- c(levels(education_factor), "Associate Degree")
+education_factor_with_new_level <- factor(education_factor, levels = new_levels_for_education)
+print("Education Factor (with new level added to its definition):")
+print(education_factor_with_new_level) # Data values are unchanged
+print(levels(education_factor_with_new_level))
+
+# Now you can assign the new level
+education_factor_with_new_level[1] <- "Associate Degree"
+print("Education Factor (with new level assigned):")
+print(education_factor_with_new_level)
+```
+
+**Output:**
+
+```
+[1] "Original Education Factor:"
+[1] High School Bachelors   Masters     High School PhD         Bachelors
+Levels: High School < Bachelors < Masters < PhD
+[1] "High School" "Bachelors"   "Masters"     "PhD"
+[1] "Current levels:"
+[1] "High School" "Bachelors"   "Masters"     "PhD"
+[1] "Education Factor (reordered levels):"
+[1] High School Bachelors   Masters     High School PhD         Bachelors
+Levels: PhD < Masters < Bachelors < High School
+[1] "PhD"         "Masters"     "Bachelors"   "High School"
+[1] "Original Satisfaction Factor:"
+[1] sat   unsat neu   sat
+Levels: neu sat unsat
+[1] "Satisfaction Factor (levels renamed):"
+[1] Satisfied   Unsatisfied Neutral     Satisfied
+Levels: Neutral Satisfied Unsatisfied
+[1] "Neutral"     "Satisfied"   "Unsatisfied"
+[1] "Education Factor (with new level added to its definition):"
+[1] High School Bachelors   Masters     High School PhD         Bachelors
+Levels: High School Bachelors Masters PhD Associate Degree
+[1] "High School"      "Bachelors"        "Masters"          "PhD"
+[5] "Associate Degree"
+[1] "Education Factor (with new level assigned):"
+[1] Associate Degree Bachelors        Masters          High School
+[5] PhD              Bachelors
+Levels: High School Bachelors Masters PhD Associate Degree
+```
+
+**Key Points for Modifying Factors:**
+
+* To change the order of levels, re-create the factor with the desired `levels` argument.
+* To rename levels, use `levels(your_factor) <- new_level_names`. Ensure the new names correspond to the *existing order* of levels.
+* To add new possible levels, you must first update the `levels` attribute of the factor; you cannot simply assign a new value if it's not already a defined level.
+
+---
+
+#### **Important Considerations for Factors**
+
+* **Internal Representation:** Factors are stored as integers, with each integer mapping to a specific level. This is efficient for storage and computation.
+* **Converting Factors to Numeric:** If you try to convert a factor directly to numeric, R will convert its *internal integer codes*, not the original string values.
+    * To convert factor levels (e.g., "1", "2", "3") to numeric, first convert to character, then to numeric: `as.numeric(as.character(your_factor))`.
+    * If the factor levels are actually numbers (like `"1"`, `"2"`, `"3"`), then `as.numeric(as.character(your_factor))` will convert them correctly.
+* **Factors in Statistical Models:** Factors are crucial for statistical modeling in R. When included in a model, R automatically creates dummy variables based on the factor levels, with one level (usually the first alphabetically or the first in the defined `levels` order) serving as the reference category.
+
+**Code Snippets (Conversions and Internal Representation):**
+
+```r
+# Factor with numeric-like levels
+rating_factor <- factor(c("3", "1", "5", "2", "3"), levels = c("1", "2", "3", "4", "5"))
+print("Original Rating Factor:")
+print(rating_factor)
+
+# Incorrect direct conversion to numeric (gets internal codes)
+rating_numeric_wrong <- as.numeric(rating_factor)
+print("Incorrect numeric conversion (gets internal codes):")
+print(rating_numeric_wrong) # You'll see 3 1 5 2 3 from levels 1 2 3 4 5
+
+# Correct conversion: factor -> character -> numeric
+rating_numeric_correct <- as.numeric(as.character(rating_factor))
+print("Correct numeric conversion (gets original values):")
+print(rating_numeric_correct)
+
+# Inspect internal representation
+print("Internal integer codes of rating_factor:")
+print(unclass(rating_factor)) # Shows the underlying integer vector
+
+# Another example: gender factor
+gender_factor <- factor(c("Male", "Female", "Female", "Male"))
+print("Gender Factor:")
+print(gender_factor)
+print("Internal integer codes of gender_factor:")
+print(unclass(gender_factor)) # Female=1, Male=2 (alphabetical order)
+```
+
+**Output:**
+
+```
+[1] "Original Rating Factor:"
+[1] 3 1 5 2 3
+Levels: 1 2 3 4 5
+[1] "Incorrect numeric conversion (gets internal codes):"
+[1] 3 1 5 2 3
+[1] "Correct numeric conversion (gets original values):"
+[1] 3 1 5 2 3
+[1] "Internal integer codes of rating_factor:"
+[1] 3 1 5 2 3
+attr(,"levels")
+[1] "1" "2" "3" "4" "5"
+[1] "Gender Factor:"
+[1] Male   Female Female Male
+Levels: Female Male
+[1] "Internal integer codes of gender_factor:"
+[1] 2 1 1 2
+attr(,"levels")
+[1] "Female" "Male"
+```
+
+---
+
+This lesson provided a detailed explanation of factors, their creation for both unordered and ordered categories, and essential techniques for manipulating their levels. Understanding factors is critical for accurate data representation and effective statistical analysis in R.
+
+**Next, we will conclude Module 1.2 with Lesson 6: Data Structures Overview and Conversion.**
+```
