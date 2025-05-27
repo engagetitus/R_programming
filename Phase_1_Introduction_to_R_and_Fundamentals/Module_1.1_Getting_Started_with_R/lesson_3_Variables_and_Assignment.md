@@ -121,7 +121,22 @@ Just like in human languages, there are rules and conventions for naming variabl
 3. **Are case-sensitive.** `myVar` is different from `myvar`.
     * `my_value <- 10` and `My_Value <- 20` create two distinct variables.
 4. **Cannot be R's reserved keywords** (e.g., `if`, `else`, `for`, `function`, `TRUE`, `FALSE`, `NULL`, `NA`, `Inf`, `NaN`).
-5. **Should not be names of built-in functions** (e.g., `c`, `mean`, `sum`) to avoid shadowing them. While R allows this, it's a bad practice as it makes the built-in function temporarily unusable.
+5. **Should not be names of built-in functions or constants** (e.g., `c`, `mean`, `sum`) to avoid shadowing them. While R allows this, it's a bad practice as it makes the built-in function temporarily unusable.
+An example Inbuilt Constant is `pi` (≈ 3.141593)
+
+```r
+# Example Mistake
+pi <- 10        # Overwrites the built-in pi value
+circumference <- 2 * pi * radius  # Produces wrong result
+```
+
+```r
+# How to Fix This
+pi_value <- 3.14159
+circumference <- 2 * pi_value * radius
+area <- pi * radius^2 # correct results with pi
+
+```
 
 **Common Naming Conventions (Style Guides):**
 
