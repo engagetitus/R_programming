@@ -5,8 +5,6 @@
 * Introduction to comments (`#`).
 * Creating and running your first R scripts.
 
-Y
-
 ## **Phase 1: Introduction to R and Fundamentals**
 
 ### **Module 1.1: Getting Started with R**
@@ -16,8 +14,6 @@ Y
 ### **Lesson 2: Basic Operations**
 
 This lesson focuses on the fundamental operators in R, which are essential for performing calculations and making logical comparisons. We'll cover arithmetic, relational, and logical operators, along with R's approach to vectorized operations.
-
----
 
 ---
 

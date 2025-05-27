@@ -5,20 +5,11 @@
 * Installing R and RStudio on your system.
 * Tour of the RStudio Interface: Console, Script Editor, Environment, Files/Plots/Packages/Help panes.
 
-You are absolutely right! My apologies for missing that crucial formatting. Wrapping the lesson content in `md` blocks will make it much clearer where each file's content begins and ends for easy copying.
-
-Let me regenerate the content for **Lesson 1: What is R and RStudio?** with the `md` delimiters as requested.
-
----
-
-```md
-# Lesson 1: What is R and RStudio?
-
 This lesson introduces you to the R programming language and RStudio, the most popular Integrated Development Environment (IDE) for R. Understanding these foundational tools is crucial for any aspiring R user.
 
 ---
 
-#### **What is R?**
+## **What is R?**
 
 R is a powerful open-source programming language and software environment specifically designed for statistical computing and graphics. It's widely used by statisticians, data analysts, researchers, and data scientists across various industries.
 
@@ -33,7 +24,7 @@ R is a powerful open-source programming language and software environment specif
 
 ---
 
-#### **Why Use R for Data Science?**
+## **Why Use R for Data Science?**
 
 * **Strong Statistical Foundation:** R was built by statisticians, making it inherently strong for statistical analysis and modeling.
 * **Cutting-Edge Research:** Many new statistical and machine learning methods are first implemented in R packages.
@@ -43,7 +34,7 @@ R is a powerful open-source programming language and software environment specif
 
 ---
 
-#### **What is RStudio?**
+### **What is RStudio?**
 
 While R is the *language* and the *engine*, RStudio is an Integrated Development Environment (IDE) that provides a user-friendly interface for working with R. Think of it as a control center that makes writing, executing, and debugging R code much easier and more efficient. While you can use R without RStudio, it's highly recommended for a smoother and more productive workflow.
 
@@ -53,11 +44,11 @@ While R is the *language* and the *engine*, RStudio is an Integrated Development
 * **Source Editor:** For writing and saving R scripts, R Markdown documents, and other files.
 * **Environment Pane:** Shows all objects (variables, data frames, functions) currently loaded in your R session.
 * **Files/Plots/Packages/Help/Viewer Panes:**
-    * **Files:** Navigates your file system.
-    * **Plots:** Displays generated graphics.
-    * **Packages:** Manages installed and loaded R packages.
-    * **Help:** Accesses R's documentation and package help files.
-    * **Viewer:** Displays local web content, often used for interactive plots or Shiny apps.
+  * **Files:** Navigates your file system.
+  * **Plots:** Displays generated graphics.
+  * **Packages:** Manages installed and loaded R packages.
+  * **Help:** Accesses R's documentation and package help files.
+  * **Viewer:** Displays local web content, often used for interactive plots or Shiny apps.
 * **Project Management:** Helps organize your work into self-contained projects, ensuring reproducibility.
 * **Debugging Tools:** Features that help you identify and fix errors in your code.
 
@@ -88,23 +79,23 @@ Once R and RStudio are installed, open RStudio. You'll typically see a layout di
 
 Let's briefly tour the default layout:
 
-1.  **Top-Left Pane: Source Editor (or Script Editor)**
+1. **Top-Left Pane: Source Editor (or Script Editor)**
     * This is where you write your R code. You'll save these as `.R` files.
     * You can execute lines of code from here by placing your cursor on the line and pressing `Ctrl + Enter` (Windows/Linux) or `Cmd + Enter` (macOS).
     * You can also execute an entire script by selecting all lines and pressing `Ctrl + Enter`/`Cmd + Enter`, or by clicking the "Run" button in the toolbar.
 
-2.  **Bottom-Left Pane: Console**
+2. **Bottom-Left Pane: Console**
     * This is where R commands are executed directly and their results are displayed.
     * You can type commands directly into the console prompt (`>`) and press `Enter` to execute them.
     * Output from scripts run from the Source Editor will also appear here.
 
-3.  **Top-Right Pane: Environment / History / Connections / Tutorial**
+3. **Top-Right Pane: Environment / History / Connections / Tutorial**
     * **Environment:** This tab displays all the objects (variables, data frames, functions) you have created or loaded in your current R session. It's very useful for keeping track of your data.
     * **History:** Shows a record of all the commands you've executed in the console.
     * **Connections:** Used for connecting to various data sources like databases.
     * **Tutorial:** If you have learnedr packages installed, you can access interactive tutorials here.
 
-4.  **Bottom-Right Pane: Files / Plots / Packages / Help / Viewer**
+4. **Bottom-Right Pane: Files / Plots / Packages / Help / Viewer**
     * **Files:** A file browser that allows you to navigate your directories, open files, and create new ones.
     * **Plots:** Where all your generated R graphics (charts, plots) will appear. You can export or zoom into them here.
     * **Packages:** Lists all installed R packages. You can install new packages, update existing ones, and load/unload them from here.
