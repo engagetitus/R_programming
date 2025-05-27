@@ -156,7 +156,7 @@ R supports six **atomic data types** (also called "modes"). Atomic vectors can o
 
     **Output:**
 
-    ```
+    ```bash
     [1] "Nairobi"
     [1] "Hello World!"
     [1] "R is a powerful tool for data analysis."
@@ -183,7 +183,7 @@ R supports six **atomic data types** (also called "modes"). Atomic vectors can o
 
     **Output:**
 
-    ```
+    ```bash
     [1] 2+3i
     [1] 0+1i
     [1] "complex"
@@ -206,7 +206,7 @@ R supports six **atomic data types** (also called "modes"). Atomic vectors can o
 
     **Output:**
 
-    ```
+    ```bash
     [1] 48 65 6c 6c 6f
     [1] "raw"
     [1] "raw"
@@ -220,13 +220,88 @@ The most common way to create a vector in R is using the `c()` function, which s
 
 **Syntax:**
 
-```R
-c(element1, element2, ..., elementN)
+```r
+vector_name <- c(element1, element2, element3, ...)
 ```
 
 **Parameters:**
 
 * `element1, element2, ...`: The individual values (of the same atomic type) that you want to combine into a vector.
+
+* `vector_name`: The variable name you choose to store your newly created vector.
+
+```r
+print("--- Creating Vectors using c() ---")
+
+# 1. Creating a numeric vector
+numeric_vector <- c(10, 20, 30, 40, 50)
+print("Numeric Vector:")
+print(numeric_vector)
+print(paste("Class of numeric_vector:", class(numeric_vector)))
+
+# 2. Creating a character vector
+character_vector <- c("apple", "banana", "cherry")
+print("Character Vector:")
+print(character_vector)
+print(paste("Class of character_vector:", class(character_vector)))
+
+# 3. Creating a logical vector
+logical_vector <- c(TRUE, FALSE, TRUE, TRUE)
+print("Logical Vector:")
+print(logical_vector)
+print(paste("Class of logical_vector:", class(logical_vector)))
+
+# 4. Creating a vector with mixed data types (R will coerce to a common type)
+# In this case, numbers and logical values will be coerced to character type.
+mixed_vector <- c(1, "hello", TRUE, 3.14)
+print("Mixed Vector (coerced):")
+print(mixed_vector)
+print(paste("Class of mixed_vector (after coercion):", class(mixed_vector)))
+
+# 5. Creating an empty vector (useful for pre-allocating or building vectors)
+empty_numeric_vector <- numeric() # Creates an empty numeric vector
+print("Empty Numeric Vector:")
+print(empty_numeric_vector)
+print(paste("Length of empty_numeric_vector:", length(empty_numeric_vector)))
+
+empty_character_vector <- character(0) # Another way to create an empty vector
+print("Empty Character Vector:")
+print(empty_character_vector)
+print(paste("Length of empty_character_vector:", length(empty_character_vector)))
+
+# You can also combine existing vectors using c()
+vector_a <- c(1, 2)
+vector_b <- c(3, 4)
+combined_vector <- c(vector_a, vector_b, 5)
+print("Combined Vector (from existing vectors):")
+print(combined_vector)
+```
+
+**Expected Output**
+
+```bash
+[1] "--- Creating Vectors using c() ---"
+[1] "Numeric Vector:"
+[1] 10 20 30 40 50
+[1] "Class of numeric_vector: numeric"
+[1] "Character Vector:"
+[1] "apple"  "banana" "cherry"
+[1] "Class of character_vector: character"
+[1] "Logical Vector:"
+[1]  TRUE FALSE  TRUE  TRUE
+[1] "Class of logical_vector: logical"
+[1] "Mixed Vector (coerced):"
+[1] "1"     "hello" "TRUE"  "3.14"
+[1] "Class of mixed_vector (after coercion): character"
+[1] "Empty Numeric Vector:"
+numeric(0)
+[1] "Length of empty_numeric_vector: 0"
+[1] "Empty Character Vector:"
+character(0)
+[1] "Length of empty_character_vector: 0"
+[1] "Combined Vector (from existing vectors):"
+[1] 1 2 3 4 5
+```
 
 **Return Value:**
 

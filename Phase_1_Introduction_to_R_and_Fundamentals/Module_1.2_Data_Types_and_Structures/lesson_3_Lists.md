@@ -4,6 +4,7 @@
 * Creating lists (`list()`).
 * Accessing list elements using `[]`, `[[]]`, and `$`.
 * Nested lists.
+
 **Module 1.2: Data Types and Structures**.
 
 Lists are incredibly versatile in R, as they allow you to store collections of objects of *different* types, unlike atomic vectors and matrices/arrays. This makes them a powerful tool for organizing various pieces of information.

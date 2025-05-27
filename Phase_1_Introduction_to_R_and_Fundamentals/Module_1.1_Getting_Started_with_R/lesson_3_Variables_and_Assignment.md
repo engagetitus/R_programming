@@ -273,4 +273,3 @@ print(ls()) # my_character should be gone
 
 This lesson provided a comprehensive understanding of variables and assignment in R. You now know how to store data, the best practices for assignment and naming, and how to inspect your variables. This knowledge is foundational for working with R's various data structures, which we will explore in the next module.
 
-```

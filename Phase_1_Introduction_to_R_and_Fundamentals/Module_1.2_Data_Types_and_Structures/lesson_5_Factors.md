@@ -2,15 +2,13 @@
 
 ## **Module 1.2: Data Types and Structures**
 
----
-
-### **Lesson 5: Factors**
+## **Lesson 5: Factors**
 
 This lesson introduces **factors**, a crucial data type in R used to represent categorical data. Factors are fundamental for statistical modeling, plotting, and ensuring that R treats categorical variables correctly. You'll learn how to create, manipulate, and work with factors, including ordered and unordered categories.
 
 ---
 
-#### **Understanding Factors: Categorical Data in R**
+### **Understanding Factors: Categorical Data in R**
 
 A **factor** is a vector that can contain only pre-defined, distinct values called **levels**. They are essentially numeric vectors internally, but with labels (levels) attached to these numbers. This allows R to efficiently store and work with categorical variables, where values belong to a finite set of possibilities (e.g., "Male", "Female"; "High", "Medium", "Low"; "Red", "Green", "Blue").
 
@@ -297,7 +295,7 @@ print(unclass(gender_factor)) # Female=1, Male=2 (alphabetical order)
 
 **Output:**
 
-```
+```bash
 [1] "Original Rating Factor:"
 [1] 3 1 5 2 3
 Levels: 1 2 3 4 5
@@ -323,4 +321,3 @@ attr(,"levels")
 This lesson provided a detailed explanation of factors, their creation for both unordered and ordered categories, and essential techniques for manipulating their levels. Understanding factors is critical for accurate data representation and effective statistical analysis in R.
 
 **Next, we will conclude Module 1.2 with Lesson 6: Data Structures Overview and Conversion.**
-```

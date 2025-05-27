@@ -76,7 +76,13 @@ my_df <- data.frame(
 print("My First Data Frame:")
 print(my_df)
 print(class(my_df))
+```
 
+```bash
+
+```
+
+```r
 # Create a data frame and specify stringsAsFactors = FALSE
 # This ensures Name remains a character vector, not a factor
 students_df <- data.frame(
@@ -100,7 +106,7 @@ print(class(students_df$FirstName)) # Check type of 'FirstName' column
 
 **Output:**
 
-```
+```bash
 [1] "My First Data Frame:"
   ID    Name Age IsStudent
 1  1   Alice  24      TRUE
@@ -150,62 +156,9 @@ employees_df <- data.frame(
 )
 print("Original Employees Data Frame:")
 print(employees_df)
-
-# 1. Accessing a single element (matrix-like)
-print("Name of employee in row 2, column 2:")
-print(employees_df[2, 2])
-print("Salary of employee E003:")
-print(employees_df[3, "Salary"])
-
-# 2. Accessing a specific row (matrix-like)
-print("Data for the 3rd employee (row 3):")
-print(employees_df[3, ]) # Returns a data frame (unless drop=TRUE for single row/col)
-
-# 3. Accessing a specific column as a vector (list-like using [[ ]])
-print("All Names (as a vector):")
-print(employees_df[["Name"]])
-print(class(employees_df[["Name"]]))
-
-# 4. Accessing a specific column as a vector (list-like using $) - MOST COMMON
-print("All Salaries (as a vector):")
-print(employees_df$Salary)
-print(class(employees_df$Salary))
-
-# 5. Accessing multiple rows and columns (sub-dataframe)
-print("Names and Departments for employees 1, 3, 5:")
-print(employees_df[c(1, 3, 5), c("Name", "Department")])
-
-# 6. Logical Indexing (selecting rows based on a condition)
-print("Employees with Salary > 70000:")
-print(employees_df[employees_df$Salary > 70000, ])
-
-print("Employees in 'IT' department who are active:")
-print(employees_df[employees_df$Department == "IT" & employees_df$IsActive == TRUE, ])
-
-# Select only specific columns for the filtered rows
-print("Names and Salary of employees with > 8 years experience:")
-print(employees_df[employees_df$YearsExp > 8, c("Name", "Salary")])
-
-# 7. Modifying elements
-employees_df[1, "Salary"] <- 62000 # Update John Doe's salary
-employees_df$Department[2] <- "Marketing" # Update Jane Smith's department
-print("Data frame after modifications:")
-print(employees_df)
-
-# Adding a new column
-employees_df$Bonus <- employees_df$Salary * 0.10 # 10% bonus
-print("Data frame after adding 'Bonus' column:")
-print(employees_df)
-
-# Removing a column (set to NULL)
-employees_df$IsActive <- NULL
-print("Data frame after removing 'IsActive' column:")
-print(employees_df)
 ```
 
-**Output:**
-
-```
+```bash
 [1] "Original Employees Data Frame:"
   EmpID        Name Department Salary YearsExp IsActive
 1  E001    John Doe         HR  60000        5     TRUE
@@ -213,24 +166,95 @@ print(employees_df)
 3  E003 Peter Jones      Sales  70000        7    FALSE
 4  E004  Mary Brown         HR  62000        6     TRUE
 5  E005 Chris Green         IT  90000       12     TRUE
+
+
+```
+
+```r
+# 1. Accessing a single element (matrix-like)
+print("Name of employee in row 2, column 2:")
+print(employees_df[2, 2])
+print("Salary of employee E003:")
+print(employees_df[3, "Salary"])
+```
+
+```bash
 [1] "Name of employee in row 2, column 2:"
 [1] "Jane Smith"
 [1] "Salary of employee E003:"
 [1] 70000
+
+```
+
+```r
+# 2. Accessing a specific row (matrix-like)
+print("Data for the 3rd employee (row 3):")
+print(employees_df[3, ]) # Returns a data frame (unless drop=TRUE for single row/col)
+```
+
+```bash
 [1] "Data for the 3rd employee (row 3):"
   EmpID        Name Department Salary YearsExp IsActive
 3  E003 Peter Jones      Sales  70000        7    FALSE
+
+
+```
+
+```r
+# 3. Accessing a specific column as a vector (list-like using [[ ]])
+print("All Names (as a vector):")
+print(employees_df[["Name"]])
+print(class(employees_df[["Name"]]))
+```
+
+```bash
 [1] "All Names (as a vector):"
 [1] "John Doe"    "Jane Smith"  "Peter Jones" "Mary Brown"  "Chris Green"
 [1] "character"
+
+```
+
+```r
+# 4. Accessing a specific column as a vector (list-like using $) - MOST COMMON
+print("All Salaries (as a vector):")
+print(employees_df$Salary)
+print(class(employees_df$Salary))
+```
+
+```bash
+
 [1] "All Salaries (as a vector):"
 [1] 60000 85000 70000 62000 90000
 [1] "numeric"
+
+```
+
+```r
+# 5. Accessing multiple rows and columns (sub-dataframe)
+print("Names and Departments for employees 1, 3, 5:")
+print(employees_df[c(1, 3, 5), c("Name", "Department")])
+```
+
+```bash
+
 [1] "Names and Departments for employees 1, 3, 5:"
         Name Department
 1    John Doe         HR
 3 Peter Jones      Sales
 5 Chris Green         IT
+
+```
+
+```r
+# 6. Logical Indexing (selecting rows based on a condition)
+print("Employees with Salary > 70000:")
+print(employees_df[employees_df$Salary > 70000, ])
+
+print("Employees in 'IT' department who are active:")
+print(employees_df[employees_df$Department == "IT" & employees_df$IsActive == TRUE, ])
+```
+
+```bash
 [1] "Employees with Salary > 70000:"
   EmpID        Name Department Salary YearsExp IsActive
 2  E002  Jane Smith         IT  85000       10     TRUE
@@ -239,10 +263,32 @@ print(employees_df)
   EmpID        Name Department Salary YearsExp IsActive
 2  E002  Jane Smith         IT  85000       10     TRUE
 5  E005 Chris Green         IT  90000       12     TRUE
+
+```
+
+```r
+# Select only specific columns for the filtered rows
+print("Names and Salary of employees with > 8 years experience:")
+print(employees_df[employees_df$YearsExp > 8, c("Name", "Salary")])
+```
+
+```bash
 [1] "Names and Salary of employees with > 8 years experience:"
         Name Salary
 2 Jane Smith  85000
 5 Chris Green 90000
+
+```
+
+```r
+# 7. Modifying elements
+employees_df[1, "Salary"] <- 62000 # Update John Doe's salary
+employees_df$Department[2] <- "Marketing" # Update Jane Smith's department
+print("Data frame after modifications:")
+print(employees_df)
+```
+
+```bash
 [1] "Data frame after modifications:"
   EmpID        Name Department Salary YearsExp IsActive
 1  E001    John Doe         HR  62000        5     TRUE
@@ -250,6 +296,18 @@ print(employees_df)
 3  E003 Peter Jones      Sales  70000        7    FALSE
 4  E004  Mary Brown         HR  62000        6     TRUE
 5  E005 Chris Green         IT  90000       12     TRUE
+
+```
+
+```r
+# Adding a new column
+employees_df$Bonus <- employees_df$Salary * 0.10 # 10% bonus
+print("Data frame after adding 'Bonus' column:")
+print(employees_df)
+```
+
+```bash
+
 [1] "Data frame after adding 'Bonus' column:"
   EmpID        Name Department Salary YearsExp IsActive Bonus
 1  E001    John Doe         HR  62000        5     TRUE  6200
@@ -257,6 +315,19 @@ print(employees_df)
 3  E003 Peter Jones      Sales  70000        7    FALSE  7000
 4  E004  Mary Brown         HR  62000        6     TRUE  6200
 5  E005 Chris Green         IT  90000       12     TRUE  9000
+
+```
+
+```r
+# Removing a column (set to NULL)
+employees_df$IsActive <- NULL
+print("Data frame after removing 'IsActive' column:")
+print(employees_df)
+```
+
+**Output:**
+
+```bash
 [1] "Data frame after removing 'IsActive' column:"
   EmpID        Name Department Salary YearsExp Bonus
 1  E001    John Doe         HR  62000        5  6200
@@ -268,7 +339,7 @@ print(employees_df)
 
 ---
 
-#### **Useful Data Frame Functions**
+## **Useful Data Frame Functions**
 
 Several functions are commonly used to inspect and manipulate data frames:
 
@@ -296,34 +367,115 @@ demo_df <- data.frame(
 print("Demo Data Frame:")
 print(demo_df)
 
+```
+
+```bash
+[1] "Demo Data Frame:"
+  Student Gender Score Grade
+1       A      M    85     B
+2       B      F    92     A
+3       C      F    78     C
+4       D      M    65     D
+5       E      F    95     A
+6       F      M    88     B
+7       G      M    70     C
+8       H      F    80     B
+
+```
+
+```r
 # Inspect structure
 print("Structure of demo_df (str()):")
 str(demo_df)
+```
 
+```bash
+[1] "Structure of demo_df (str()):"
+'data.frame': 8 obs. of  4 variables:
+ $ Student: chr  "A" "B" "C" "D" ...
+ $ Gender : chr  "M" "F" "F" "M" ...
+ $ Score  : num  85 92 78 65 95 88 70 80
+ $ Grade  : chr  "B" "A" "C" "D" ...
+
+```
+
+```r
 # Get a summary of the data
 print("Summary of demo_df:")
 summary(demo_df)
+```
 
+```bash
+[1] "Summary of demo_df:"
+   Student             Gender              Score          Grade
+ Length:8           Length:8           Min.   :65.0   Length:8
+ Class :character   Class :character   1st Qu.:76.0   Class :character
+ Mode  :character   Mode  :character   Median :82.5   Mode  :character
+                                       Mean   :81.6
+                                       3rd Qu.:86.8
+                                       Max.   :95.0
+
+```
+
+```r
 # View the first few rows
 print("First 3 rows:")
 print(head(demo_df, n = 3))
+```
 
+```bash
+[1] "First 3 rows:"
+  Student Gender Score Grade
+1       A      M    85     B
+2       B      F    92     A
+3       C      F    78     C
+
+```
+
+```r
 # View the last few rows
 print("Last 2 rows:")
 print(tail(demo_df, n = 2))
+```
 
+```bash
+[1] "Last 2 rows:"
+  Student Gender Score Grade
+7       G      M    70     C
+8       H      F    80     B
+
+```
+
+```r
 # Get/Set column names
 print("Column names:")
 print(colnames(demo_df))
 # colnames(demo_df)[3] <- "ExamScore" # To rename a column
 # print(colnames(demo_df))
+```
 
+```bash
+[1] "Column names:"
+[1] "Student"  "Gender"   "Score"    "Grade"
+
+
+```
+
+```r
 # Get/Set row names (default is numbers)
 print("Row names:")
 print(rownames(demo_df))
 # rownames(demo_df) <- paste0("Obs_", 1:nrow(demo_df)) # To set custom row names
 # print(rownames(demo_df))
+```
 
+```bash
+[1] "Row names:"
+[1] "1" "2" "3" "4" "5" "6" "7" "8"
+
+```
+
+```r
 # Get dimensions
 print("Dimensions (rows, columns):")
 print(dim(demo_df))
@@ -331,7 +483,20 @@ print("Number of rows:")
 print(nrow(demo_df))
 print("Number of columns:")
 print(ncol(demo_df))
+```
 
+```bash
+[1] "Dimensions (rows, columns):"
+[1] 8 4
+[1] "Number of rows:"
+[1] 8
+[1] "Number of columns:"
+[1] 4
+
+
+```
+
+```r
 # Combining data frames
 new_students_df <- data.frame(
     Student = c("I", "J"),
@@ -345,66 +510,9 @@ new_students_df <- data.frame(
 combined_df_rows <- rbind(demo_df, new_students_df)
 print("Combined Data Frame (rows):")
 print(combined_df_rows)
-
-# Create another column as a data frame
-new_column_df <- data.frame(
-    Attendance = c("High", "Medium", "High", "Low", "High", "Medium", "Low", "High", "High", "Medium"),
-    stringsAsFactors = FALSE
-)
-
-# Column bind (add columns - requires same number of rows)
-# Note: new_column_df has 10 rows, combined_df_rows has 10 rows
-combined_df_cols <- cbind(combined_df_rows, new_column_df)
-print("Combined Data Frame (columns):")
-print(combined_df_cols)
 ```
 
-**Output:**
-
-```
-[1] "Demo Data Frame:"
-  Student Gender Score Grade
-1       A      M    85     B
-2       B      F    92     A
-3       C      F    78     C
-4       D      M    65     D
-5       E      F    95     A
-6       F      M    88     B
-7       G      M    70     C
-8       H      F    80     B
-[1] "Structure of demo_df (str()):"
-'data.frame': 8 obs. of  4 variables:
- $ Student: chr  "A" "B" "C" "D" ...
- $ Gender : chr  "M" "F" "F" "M" ...
- $ Score  : num  85 92 78 65 95 88 70 80
- $ Grade  : chr  "B" "A" "C" "D" ...
-[1] "Summary of demo_df:"
-   Student             Gender              Score          Grade
- Length:8           Length:8           Min.   :65.0   Length:8
- Class :character   Class :character   1st Qu.:76.0   Class :character
- Mode  :character   Mode  :character   Median :82.5   Mode  :character
-                                       Mean   :81.6
-                                       3rd Qu.:86.8
-                                       Max.   :95.0
-[1] "First 3 rows:"
-  Student Gender Score Grade
-1       A      M    85     B
-2       B      F    92     A
-3       C      F    78     C
-[1] "Last 2 rows:"
-  Student Gender Score Grade
-7       G      M    70     C
-8       H      F    80     B
-[1] "Column names:"
-[1] "Student"  "Gender"   "Score"    "Grade"
-[1] "Row names:"
-[1] "1" "2" "3" "4" "5" "6" "7" "8"
-[1] "Dimensions (rows, columns):"
-[1] 8 4
-[1] "Number of rows:"
-[1] 8
-[1] "Number of columns:"
-[1] 4
+```bash
 [1] "Combined Data Frame (rows):"
    Student Gender Score Grade
 1        A      M    85     B
@@ -417,6 +525,27 @@ print(combined_df_cols)
 8        H      F    80     B
 9        I      F    90     A
 10       J      M    75     C
+
+```
+
+```r
+# Create another column as a data frame
+new_column_df <- data.frame(
+    Attendance = c("High", "Medium", "High", "Low", "High", "Medium", "Low", "High", "High", "Medium"),
+    stringsAsFactors = FALSE
+)
+# Column bind (add columns - requires same number of rows)
+# Note: new_column_df has 10 rows, combined_df_rows has 10 rows
+combined_df_cols <- cbind(combined_df_rows, new_column_df)
+print("Combined Data Frame (columns):")
+print(combined_df_cols)
+```
+
+**Output:**
+
+```bash
+
+
 [1] "Combined Data Frame (columns):"
    Student Gender Score Grade Attendance
 1        A      M    85     B       High
