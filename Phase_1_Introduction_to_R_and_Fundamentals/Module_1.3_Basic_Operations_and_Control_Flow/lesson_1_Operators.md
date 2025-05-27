@@ -5,13 +5,8 @@
 * Logical Operators (`&`, `|`, `!`, `&&`, `||`).
 * Miscellaneous Operators (`%in%`, `%*%`).
 
-Got it! Let's dive into **Module 1.3: Basic Operations and Control Flow**, starting with **Lesson 1: Operators**.
+## **Phase 1: Introduction to R and Fundamentals**
 
-Operators are special symbols or keywords that perform operations on values and variables. Understanding them is fundamental to writing any code in R.
-
----
-
-### **Phase 1: Introduction to R and Fundamentals**
 ### **Module 1.3: Basic Operations and Control Flow**
 
 ---
@@ -85,7 +80,7 @@ print(paste("8. Vector Addition (element-wise):", paste(vec_sum, collapse = ", "
 
 **Output:**
 
-```
+```bash
 [1] "--- Arithmetic Operations ---"
 [1] "1. Addition (a + b): 13"
 [1] "2. Subtraction (a - b): 7"
@@ -163,7 +158,7 @@ print(paste("7. Scores meeting pass threshold (>=80):", paste(passed_students, c
 
 **Output:**
 
-```
+```bash
 [1] "--- Relational Operations ---"
 [1] "1. Is x equal to y (x == y)? FALSE"
 [1] "   Is x equal to z (x == z)? TRUE"
@@ -192,6 +187,7 @@ Logical operators combine logical (TRUE/FALSE) values and return a logical resul
 | `!`      | Logical NOT (Negation)                       | `!TRUE`            |
 
 **Note on `&`/`|` vs. `&&`/`||`:**
+
 * `&` and `|` perform **element-wise** comparisons on vectors.
 * `&&` and `||` perform comparisons on **single logical values** (typically the first element of vectors) and are primarily used in `if` conditions, where short-circuiting behavior can be beneficial (i.e., if the first part of an `&&` expression is `FALSE`, the second part is not evaluated).
 
@@ -250,7 +246,7 @@ print(filtered_data)
 
 **Output:**
 
-```
+```bash
 [1] "--- Logical Operations ---"
 [1] "1. Element-wise AND (TRUE & FALSE): FALSE"
 [1] "2. Element-wise OR (TRUE | FALSE): TRUE"
@@ -265,7 +261,9 @@ print(filtered_data)
 [1] Age IsStudent
 <0 rows> (or if data changes, only rows matching criteria)
 ```
+
 *(Self-correction: The example for filtered_data with the provided `data_df` would result in 0 rows. Let's make the data frame more illustrative)*
+
 ```r
 # Corrected example for practical use: Filtering a data frame
 data_df_corrected <- data.frame(
@@ -277,8 +275,10 @@ filtered_data_corrected <- data_df_corrected[data_df_corrected$Age > 25 & data_d
 print("8. Filtered Data Frame (Age > 25 AND IsStudent):")
 print(filtered_data_corrected)
 ```
+
 **Corrected Output for `filtered_data_corrected`:**
-```
+
+```bash
 [1] "8. Filtered Data Frame (Age > 25 AND IsStudent):"
   Age IsStudent
 5  28      TRUE
@@ -318,7 +318,7 @@ print(paste("3. Rightward assignment (->):", my_variable_3))
 
 **Output:**
 
-```
+```bash
 [1] "--- Assignment Operations ---"
 [1] "1. Leftward assignment (<-): 50"
 [1] "2. Leftward assignment (=): 75"
@@ -384,7 +384,7 @@ print(result_matrix_mult)
 
 **Output:**
 
-```
+```bash
 [1] "--- Miscellaneous Operations ---"
 [1] "1. Sequence (1:10): 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
 [1] "   Descending Sequence (10:1): 10, 9, 8, 7, 6, 5, 4, 3, 2, 1"
@@ -410,4 +410,4 @@ print(result_matrix_mult)
 This lesson provided a detailed overview of the various types of operators in R, including their syntax, behavior, and common use cases. Understanding these operators is foundational for performing calculations, making logical decisions, and effectively manipulating data in R.
 
 **Next, we will proceed to Lesson 2: Conditional Statements.**
-```
+

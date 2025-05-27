@@ -5,13 +5,10 @@
 * Loading packages into your R session (`library()`, `require()`).
 * Exploring package documentation.
 
-Let's move on to **Lesson 3: Introduction to Packages** within **Module 1.4: Functions and Packages**.
-
 While R's base installation is powerful, its true strength lies in its extensibility through **packages**. Packages are collections of functions, data, and compiled code in a well-defined format, designed to extend R's capabilities for specific tasks. They are the primary way the R community shares reusable code and functionalities.
 
----
+## **Phase 1: Introduction to R and Fundamentals**
 
-### **Phase 1: Introduction to R and Fundamentals**
 ### **Module 1.4: Functions and Packages**
 
 ---
@@ -24,12 +21,12 @@ This lesson will introduce you to the concept of R packages, why they are indisp
 
 #### **1. What are R Packages and Why are They Used?**
 
-* **Definition:** An R package is a collection of functions, data, and documentation that extends the capabilities of R's base system. Think of them as add-ons or plugins for R.
+* **Definition:** An R package is a collection of `functions`, data, and documentation that extends the capabilities of R's base system. Think of them as add-ons or plugins for R.
 * **Purpose:**
-    * **Extend Functionality:** Provide specialized tools for statistics, machine learning, visualization, data manipulation, web scraping, and more.
-    * **Code Reusability:** Prevent users from reinventing the wheel by providing pre-written, tested, and optimized code for common tasks.
-    * **Community Contribution:** Allow R users and developers worldwide to share their work and contribute to the R ecosystem.
-    * **Organization:** Group related functions and data together, making them easier to discover and use.
+  * **Extend Functionality:** Provide specialized tools for statistics, machine learning, visualization, data manipulation, web scraping, and more.
+  * **Code Reusability:** Prevent users from reinventing the wheel by providing pre-written, tested, and optimized code for common tasks.
+  * **Community Contribution:** Allow R users and developers worldwide to share their work and contribute to the R ecosystem.
+  * **Organization:** Group related functions and data together, making them easier to discover and use.
 
 R's core functionality is powerful, but packages are what truly make R a versatile tool for almost any data-related task. The Comprehensive R Archive Network (CRAN) hosts over 20,000 packages, with thousands more available elsewhere (e.g., Bioconductor, GitHub).
 
@@ -86,10 +83,10 @@ print("Installation successful (or package already installed) if no errors occur
 
 **Expected Output:**
 
-```
+```bash
 [1] "--- Installing Packages ---"
 [1] "Your R library paths:"
-[1] "/Users/youruser/Library/R/x86_64/4.3" "/Library/Frameworks/R.framework/Versions/4.3/Resources/library"
+[1] "/Users/titus/Library/R/x86_64/4.3" "/Library/Frameworks/R.framework/Versions/4.3/Resources/library"
 # If you uncommented install.packages("stringr"):
 # Installing package into ‘/Users/youruser/Library/R/x86_64/4.3’
 # (as ‘lib’ is unspecified)
@@ -173,7 +170,7 @@ if (require(nonexistentpackage123, quietly = TRUE)) {
 
 **Output:**
 
-```
+```bash
 [1] "--- Loading Packages ---"
 [1] "stringr package loaded using library()."
 [1] "Number of characters in ' Introduction to R Packages ': 26"
@@ -189,15 +186,15 @@ if (require(nonexistentpackage123, quietly = TRUE)) {
 The R community has created an enormous number of packages. Knowing where to find them and how to explore their functionalities is crucial.
 
 * **CRAN (Comprehensive R Archive Network):** The official repository for R packages.
-    * **Website:** [https://cran.r-project.org/web/packages/](https://cran.r-project.org/web/packages/)
-    * You can browse packages by name, task view (e.g., "Machine Learning", "Time Series"), or author. Each package has a dedicated page with a description, downloads, and links to documentation.
+  * **Website:** [https://cran.r-project.org/web/packages/](https://cran.r-project.org/web/packages/)
+  * You can browse packages by name, task view (e.g., "Machine Learning", "Time Series"), or author. Each package has a dedicated page with a description, downloads, and links to documentation.
 * **Bioconductor:** A specialized repository for bioinformatics and computational biology packages.
-    * **Website:** [https://www.bioconductor.org/](https://www.bioconductor.org/)
+  * **Website:** [https://www.bioconductor.org/](https://www.bioconductor.org/)
 * **GitHub:** Many developers host packages on GitHub before or instead of submitting to CRAN. You can install directly from GitHub using the `install_github()` function from the `devtools` package.
 * **R Documentation:** Once a package is loaded, you can access its documentation:
-    * `?function_name`: Opens the help page for a specific function.
-    * `help(package = "package_name")`: Opens the main help page for the entire package.
-    * `example(function_name)`: Runs the examples provided in the function's help page.
+  * `?function_name`: Opens the help page for a specific function.
+  * `help(package = "package_name")`: Opens the main help page for the entire package.
+  * `example(function_name)`: Runs the examples provided in the function's help page.
 
 **Code Snippets:**
 
@@ -219,7 +216,7 @@ print("--- Finding and Exploring Packages ---")
 
 **Expected Output (if uncommented):** (Output would appear in R's help viewer or console)
 
-```
+```bash
 # Output for example(str_length)
 str_length(letters)
 # [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
@@ -278,7 +275,7 @@ print(head(filtered_cars))
 
 **Output:**
 
-```
+```bash
 [1] "tidyverse loaded (dplyr, ggplot2, readr, etc. are now available)."
 [1] "Filtered cars (using dplyr):"
                      mpg  hp    wt
@@ -299,4 +296,3 @@ This lesson provided a comprehensive introduction to R packages, explaining thei
 **Module 1.4: Functions and Packages** is now complete!
 
 **Next, we will begin Phase 2: R Programming Fundamentals, starting with Module 2.1: Data Manipulation with `dplyr` and `tidyr`.**
-

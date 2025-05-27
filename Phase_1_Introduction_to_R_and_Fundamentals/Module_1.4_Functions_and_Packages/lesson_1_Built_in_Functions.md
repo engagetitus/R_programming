@@ -4,13 +4,12 @@
 * Function arguments and default values.
 * Using R's help system (`?`, `help()`, `example()`).
 
-Let's move on to **Module 1.4: Functions and Packages**, starting with **Lesson 1: Built-in Functions**.
-
 R comes with a vast collection of built-in functions that allow you to perform a wide variety of tasks without needing to write complex code yourself. These functions are the workhorses of R, enabling everything from simple calculations to complex statistical analyses.
 
 ---
 
-### **Phase 1: Introduction to R and Fundamentals**
+## **Phase 1: Introduction to R and Fundamentals**
+
 ### **Module 1.4: Functions and Packages**
 
 ---
@@ -79,7 +78,7 @@ print(paste("   Round 12.3456 to nearest integer:", round(decimal_num)))
 
 **Output:**
 
-```
+```bash
 [1] "--- Common Mathematical Functions ---"
 [1] "1. Sum of numbers: 105"
 [1] "   Sum of numbers (without na.rm): NA"
@@ -144,7 +143,7 @@ print(quantile(data_points, probs = c(0.10, 0.90)))
 
 **Output:**
 
-```
+```bash
 [1] "--- Statistical Functions ---"
 [1] "1. Standard deviation of data_points: 2.65"
 [1] "   Standard deviation of scores_with_na (na.rm=TRUE): 11.23"
@@ -421,7 +420,7 @@ print(rownames(employee_data))
 4  E004   Mary         HR  62000        6
 5  E005 Chris         IT  90000       12
 [1] "3. Structure of employee_data (str()):"
-'data.frame':	5 obs. of  5 variables:
+'data.frame': 5 obs. of  5 variables:
  $ EmpID     : chr  "E001" "E002" "E003" "E004" ...
  $ Name      : chr  "John" "Jane" "Peter" "Mary" ...
  $ Department: chr  "HR" "IT" "Sales" "HR" ...

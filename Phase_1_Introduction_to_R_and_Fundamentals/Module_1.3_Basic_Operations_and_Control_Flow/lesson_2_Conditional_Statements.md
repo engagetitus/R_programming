@@ -5,13 +5,12 @@
 * `if-else if-else` ladders.
 * Using `ifelse()` for vectorized conditional logic.
 
-Okay, let's move on to **Lesson 2: Conditional Statements** within **Module 1.3: Basic Operations and Control Flow**.
-
 Conditional statements are fundamental in programming for making decisions. They allow your R code to execute different blocks of instructions based on whether a specified condition is true or false.
 
 ---
 
-### **Phase 1: Introduction to R and Fundamentals**
+## **Phase 1: Introduction to R and Fundamentals**
+
 ### **Module 1.3: Basic Operations and Control Flow**
 
 ---
@@ -276,9 +275,9 @@ switch(EXPR, CASE1, CASE2, CASE3, ...)
 
 * `EXPR`: An expression that evaluates to a character string or a number.
 * `CASE1, CASE2, ...`: These can be:
-    * Named arguments (e.g., `case_value = result`). If `EXPR` matches `case_value`, `result` is returned.
-    * Unnamed arguments (e.g., `result`). If `EXPR` is an integer `n`, the `n`-th unnamed argument is returned.
-    * A default case (named `stop` or `default`) for unmatched `EXPR`.
+  * Named arguments (e.g., `case_value = result`). If `EXPR` matches `case_value`, `result` is returned.
+  * Unnamed arguments (e.g., `result`). If `EXPR` is an integer `n`, the `n`-th unnamed argument is returned.
+  * A default case (named `stop` or `default`) for unmatched `EXPR`.
 
 **Return Value:**
 
@@ -341,4 +340,3 @@ print(paste("Color message:", message))
 This lesson provided a detailed exploration of R's conditional statements: `if`, `if-else`, `else if`, `ifelse()`, and `switch()`. These constructs are essential for introducing logic and decision-making into your R programs, allowing them to respond dynamically to different data and conditions.
 
 **Next, we will proceed to Lesson 3: Loops.**
-```

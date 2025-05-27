@@ -5,13 +5,12 @@
 * Understanding scope (global vs. local variables).
 * Best practices for writing readable functions.
 
-Let's move on to **Lesson 2: Creating Custom Functions** within **Module 1.4: Functions and Packages**.
-
 While R offers a vast array of built-in functions, the ability to create your own custom functions is a cornerstone of efficient and reusable programming. Custom functions allow you to encapsulate a specific task or calculation, making your code more organized, readable, and less prone to errors when that task needs to be performed multiple times.
 
 ---
 
 ### **Phase 1: Introduction to R and Fundamentals**
+
 ### **Module 1.4: Functions and Packages**
 
 ---
@@ -20,7 +19,55 @@ While R offers a vast array of built-in functions, the ability to create your ow
 
 This lesson will teach you how to define and use your own functions in R. You'll learn about function structure, how to pass arguments, specify return values, and understand the crucial concept of variable scope within functions. We'll also cover best practices for writing clean and effective functions.
 
+### **Introduction: What are Functions and Why Do We Need Them?**
+
+In programming, a **function** is essentially a named block of organized, reusable code that performs a specific task. Think of it like a mini-program within your larger script. When you "call" a function, you're telling R to execute that specific block of code.
+
+You've already been using many built-in R functions (like `sum()`, `mean()`, `print()`, `c()`). Now, lets learn how to build our own.
+
+#### Why are custom functions so important and why do we need them?
+
+1. **Reusability (Don't Repeat Yourself - DRY principle):**
+    * Imagine you need to perform the same sequence of calculations or operations multiple times in different parts of your script, or even in different projects. Without functions, you'd copy and paste the same lines of code over and over.
+    * Functions allow you to write that block of code once, give it a name, and then simply call that name whenever you need to perform that task. This saves time and reduces redundancy.
+
+    ```r
+    # Without a function (repetitive)
+    x1 <- c(1, 2, 3)
+    mean_x1 <- sum(x1) / length(x1)
+    print(paste("Mean of x1:", mean_x1))
+
+    x2 <- c(10, 20, 30, 40)
+    mean_x2 <- sum(x2) / length(x2)
+    print(paste("Mean of x2:", mean_x2))
+
+    # With a function (reusable)
+    calculate_mean <- function(data_vector) {
+      return(sum(data_vector) / length(data_vector))
+    }
+    print(paste("Mean of x1 (using function):", calculate_mean(x1)))
+    print(paste("Mean of x2 (using function):", calculate_mean(x2)))
+    ```
+
+2. **Modularity and Organization:**
+    * Functions break down a complex problem into smaller, manageable chunks. Each function can focus on a specific sub-task.
+    * This makes your code easier to understand, navigate, and debug. Instead of one giant script, you have a series of well-defined building blocks.
+
+3. **Readability:**
+    * A well-named function describes what it does. Reading `calculate_average(sales_data)` is much clearer than trying to decipher a block of arithmetic operations.
+    * It abstracts away the details, allowing you to focus on the higher-level logic of your program.
+
+4. **Maintainability and Debugging:**
+    * If there's a bug in a piece of code that's used repeatedly, fixing it in a single function means you fix it everywhere it's used. Without functions, you'd have to find and correct every instance of the duplicated code.
+    * If you want to change the way a specific task is performed, you only need to modify the function's definition, not every place it appears.
+
+5. **Abstraction:**
+    * Functions allow you to use a piece of code without needing to know *how* it works internally. You just need to know what inputs it takes and what output it produces. This is how you use `sum()` without knowing its underlying algorithm.
+
+In essence, custom functions empower you to write cleaner, more efficient, more robust, and more scalable R code. They are indispensable for any non-trivial programming task and for building sophisticated analytical pipelines.
+
 ---
+
 
 #### **1. Defining a Function (`function()`)**
 
@@ -114,7 +161,7 @@ greet_user <- function(name, greeting = "Hello") {
 
 print("--- Function Arguments ---")
 # Call with default greeting
-greeting1 <- greet_user("Alice")
+greeting1 <- greet_user("Kamau")
 print(greeting1)
 
 # Call with custom greeting
@@ -143,9 +190,9 @@ print(paste("Mean (with na.rm=TRUE):", mean_with_na_rm))
 
 **Output:**
 
-```
+```bash
 [1] "--- Function Arguments ---"
-[1] "Hello Alice !"
+[1] "Hello Kamau !"
 [1] "Hi there Bob !"
 [1] "Mean (no na.rm): NA"
 [1] "Mean (with na.rm=TRUE): 25"
@@ -208,7 +255,7 @@ print(paste("Standard Deviation:", stats_list$standard_deviation))
 
 **Output:**
 
-```
+```bash
 [1] "--- Return Values ---"
 [1] "Area of circle with radius 5: 78.54"
 [1] "Area of circle with radius -2: NA"
@@ -264,7 +311,7 @@ print(paste("Global variable after function call:", global_message)) # Global va
 
 **Output:**
 
-```
+```bash
 [1] "--- Scope of Variables ---"
 [1] "Global variable before function call: I am a global message."
 [1] "Inside function - local variable: I am a local variable."
@@ -281,13 +328,13 @@ print(paste("Global variable after function call:", global_message)) # Global va
 
 Writing good functions is an art. Following these practices makes your code more robust, readable, and maintainable:
 
-1.  **Do One Thing Well:** Each function should have a single, clear purpose. If a function tries to do too many things, consider splitting it into smaller, more focused functions.
-2.  **Use Meaningful Names:** Choose descriptive names for your functions and arguments (e.g., `calculate_mean`, `input_data`, `threshold`).
-3.  **Add Comments:** Explain what your function does, what its arguments represent, what it returns, and any important assumptions or edge cases.
-4.  **Validate Inputs:** If your function expects certain types of input (e.g., a numeric vector, a positive number), add checks to ensure valid inputs. Use `stop()` for fatal errors and `warning()` for less severe issues.
-5.  **Be Consistent:** Follow a consistent style for naming, indentation, and commenting throughout your code.
-6.  **Avoid Side Effects:** Ideally, functions should not modify objects outside their own environment (i.e., global variables) unless explicitly intended and documented.
-7.  **Keep it DRY (Don't Repeat Yourself):** If you find yourself writing the same block of code more than once, it's a strong indicator that you should encapsulate it in a function.
+1. **Do One Thing Well:** Each function should have a single, clear purpose. If a function tries to do too many things, consider splitting it into smaller, more focused functions.
+2. **Use Meaningful Names:** Choose descriptive names for your functions and arguments (e.g., `calculate_mean`, `input_data`, `threshold`).
+3. **Add Comments:** Explain what your function does, what its arguments represent, what it returns, and any important assumptions or edge cases.
+4. **Validate Inputs:** If your function expects certain types of input (e.g., a numeric vector, a positive number), add checks to ensure valid inputs. Use `stop()` for fatal errors and `warning()` for less severe issues.
+5. **Be Consistent:** Follow a consistent style for naming, indentation, and commenting throughout your code.
+6. **Avoid Side Effects:** Ideally, functions should not modify objects outside their own environment (i.e., global variables) unless explicitly intended and documented.
+7. **Keep it DRY (Don't Repeat Yourself):** If you find yourself writing the same block of code more than once, it's a strong indicator that you should encapsulate it in a function.
 
 **Code Snippets (Illustrating Best Practices):**
 
@@ -381,7 +428,7 @@ print(paste("Trimmed mean (na.rm=FALSE):", mean_no_na))
 
 **Output:**
 
-```
+```bash
 [1] "--- Best Practices Example ---"
 [1] "Trimmed mean of 1, 2, 3, 4, 5, 100 : 26"
 [1] "Trimmed mean (na.rm=FALSE): NA"
@@ -395,4 +442,5 @@ In calculate_trimmed_mean(data_set_with_na, na.rm = FALSE) :
 This lesson provided a thorough guide to creating your own custom functions in R, covering their definition, argument handling, return values, variable scope, and essential best practices for writing high-quality, reusable code. This skill is critical for organizing your R projects and automating complex tasks.
 
 **Next, we will proceed to Lesson 3: Introduction to Packages.**
-```
+
+

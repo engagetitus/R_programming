@@ -1,0 +1,363 @@
+
+# **Phase 1: Introduction to R and Fundamentals**
+
+## **Module 1.2: Data Types and Structures**
+
+---
+
+### **Lesson 6: Data Structures Overview and Conversion**
+
+This lesson provides a comprehensive overview of the core R data structures discussed in this module, highlighting their key characteristics. More importantly, it demonstrates how to convert between these structures, which is a common requirement in data preparation and analysis.
+
+---
+
+#### **Overview of R Data Structures**
+
+Let's recap the fundamental data structures in R:
+
+| Data Structure  | Dimensions   | Homogeneity (Data Type) | Key Characteristics                                 | Typical Use Case                                    |
+| :-------------- | :----------- | :---------------------- | :-------------------------------------------------- | :-------------------------------------------------- |
+| **Atomic Vector** | 1 (single row/col) | Homogeneous             | Sequence of elements of the *same* basic type.     | Storing lists of numbers, text, logical values.     |
+| **Matrix** | 2 (rows & cols) | Homogeneous             | Rectangular array of elements of the *same* type.  | Linear algebra, numerical computations, small tables of uniform data. |
+| **Array** | N (multi-dim) | Homogeneous             | Multi-dimensional array of elements of the *same* type. | Storing multi-dimensional data (e.g., time series across regions). |
+| **List** | 1 (linear)   | Heterogeneous           | Ordered collection of objects of *any* type.       | Storing results of analyses, complex objects with varied components. |
+| **Data Frame** | 2 (rows & cols) | Heterogeneous (by column) | List of equal-length vectors. Columns can be different types, rows are observations. | **The most common structure for tabular datasets.** |
+| **Factor** | 1 (single row/col) | Homogeneous (numeric levels) | Represents categorical data with predefined `levels`. | Storing categorical variables (e.g., Gender, Grade). |
+
+#### Key Principle: Homogeneity vs. Heterogeneity
+
+* **Homogeneous:** Atomic Vector, Matrix, Array, Factor (elements must be of the same base type).
+* **Heterogeneous:** List, Data Frame (can contain elements/columns of different types).
+
+This distinction is crucial because R will automatically perform **coercion** to the most flexible type when you try to combine different types into a homogeneous structure.
+
+---
+
+#### **Data Structure Conversions**
+
+Converting between data structures is a frequent task. R provides `as.type()` functions for this purpose, such as `as.vector()`, `as.matrix()`, `as.data.frame()`, `as.list()`, `as.factor()`, `as.numeric()`, `as.character()`, etc.
+
+**Important Note on Coercion during Conversion:**
+When converting from a heterogeneous structure (like a data frame or list) to a homogeneous one (like a vector or matrix), or when converting between different atomic types, R will apply its type coercion rules. This can lead to unexpected results if not understood (e.g., numbers becoming characters).
+
+---
+
+### **1. Vector Conversions**
+
+* **To Numeric/Integer/Logical/Character:** `as.numeric()`, `as.integer()`, `as.logical()`, `as.character()`.
+
+    **Code Snippets:**
+
+    ```r
+    # Numeric to character
+    num_vec <- c(10, 20, 30)
+    char_vec <- as.character(num_vec)
+    print("Numeric to Character:")
+    print(char_vec)
+    print(class(char_vec))
+
+    # Character to numeric (if convertible)
+    num_str_vec <- c("100", "200", "300")
+    converted_num_vec <- as.numeric(num_str_vec)
+    print("Character (numeric strings) to Numeric:")
+    print(converted_num_vec)
+    print(class(converted_num_vec))
+
+    # Character to numeric (if not convertible, results in NA and warning)
+    mixed_str_vec <- c("10", "abc", "20")
+    converted_mixed_vec <- as.numeric(mixed_str_vec)
+    print("Character (mixed strings) to Numeric:")
+    print(converted_mixed_vec)
+    print(class(converted_mixed_vec))
+    print(is.na(converted_mixed_vec)) # Check for NAs
+
+    # Logical to numeric (TRUE=1, FALSE=0)
+    logic_vec <- c(TRUE, FALSE, TRUE)
+    num_logic_vec <- as.numeric(logic_vec)
+    print("Logical to Numeric:")
+    print(num_logic_vec)
+    print(class(num_logic_vec))
+
+    # Numeric (0/1) to logical
+    binary_num_vec <- c(1, 0, 1, 0)
+    logic_binary_vec <- as.logical(binary_num_vec)
+    print("Numeric (0/1) to Logical:")
+    print(logic_binary_vec)
+    print(class(logic_binary_vec))
+    ```
+
+    **Output:**
+
+    ```bash
+    [1] "Numeric to Character:"
+    [1] "10" "20" "30"
+    [1] "character"
+    [1] "Character (numeric strings) to Numeric:"
+    [1] 100 200 300
+    [1] "numeric"
+    [1] "Character (mixed strings) to Numeric:"
+    [1] 10 NA 20
+    [1] "numeric"
+    [1] FALSE  TRUE FALSE
+    [1] "Logical to Numeric:"
+    [1] 1 0 1
+    [1] "numeric"
+    [1] "Numeric (0/1) to Logical:"
+    [1] TRUE FALSE TRUE FALSE
+    [1] "logical"
+    ```
+
+---
+
+### **2. Matrix Conversions**
+
+* **Vector to Matrix:** `matrix()`
+* **Matrix to Vector:** `as.vector()` (or simply printing/manipulating will often coerce)
+* **Matrix to Data Frame:** `as.data.frame()`
+
+    **Code Snippets:**
+
+    ```r
+    # Vector to Matrix
+    data_vec <- 1:6
+    mat_from_vec <- matrix(data_vec, nrow = 2, byrow = TRUE)
+    print("Vector to Matrix:")
+    print(mat_from_vec)
+
+    # Matrix to Vector
+    vec_from_mat <- as.vector(mat_from_vec)
+    print("Matrix to Vector:")
+    print(vec_from_mat)
+    print(class(vec_from_mat))
+
+    # Matrix to Data Frame (columns become columns, rows become rows)
+    char_matrix <- matrix(c("A", "B", "C", "D"), nrow = 2, byrow = TRUE)
+    df_from_matrix <- as.data.frame(char_matrix, stringsAsFactors = FALSE)
+    print("Matrix to Data Frame:")
+    print(df_from_matrix)
+    print(class(df_from_matrix))
+    print(sapply(df_from_matrix, class)) # Check column types
+    ```
+
+    **Output:**
+
+    ```bash
+    [1] "Vector to Matrix:"
+     [,1] [,2] [,3]
+    [1,]    1    2    3
+    [2,]    4    5    6
+    [1] "Matrix to Vector:"
+    [1] 1 4 2 5 3 6
+    [1] "integer"
+    [1] "Matrix to Data Frame:"
+      V1 V2
+    1  A  C
+    2  B  D
+    [1] "data.frame"
+           V1        V2
+    "character" "character"
+    ```
+
+---
+
+### **3. List Conversions**
+
+* **Vector/Matrix/Data Frame to List:** `as.list()`
+* **List to Vector:** `unlist()` (beware of coercion!)
+* **List to Data Frame:** `as.data.frame()` (only if all elements are vectors of equal length).
+
+    **Code Snippets:**
+
+    ```r
+    # Vector to List
+    vec_to_list <- as.list(c(1, 2, 3))
+    print("Vector to List:")
+    print(vec_to_list)
+    print(class(vec_to_list))
+
+    # List to Vector (using unlist, leads to coercion)
+    my_mixed_list <- list(num = 1:3, char = c("a", "b"), logic = TRUE)
+    unlisted_vec <- unlist(my_mixed_list)
+    print("List to Vector (via unlist, with coercion):")
+    print(unlisted_vec)
+    print(class(unlisted_vec)) # All elements become character
+
+    # List to Data Frame (if components are vectors of equal length)
+    list_for_df <- list(
+        Name = c("X", "Y", "Z"),
+        Age = c(25, 30, 22),
+        Score = c(88, 92, 75)
+    )
+    df_from_list <- as.data.frame(list_for_df, stringsAsFactors = FALSE)
+    print("List to Data Frame:")
+    print(df_from_list)
+    print(class(df_from_list))
+
+    # List to Data Frame (if components are not equal length, results in error)
+    # unequal_list <- list(A = 1:3, B = 1:2)
+    # as.data.frame(unequal_list) # Uncomment to see error
+    ```
+
+    **Output:**
+
+    ```bash
+    [1] "Vector to List:"
+    [[1]]
+    [1] 1
+
+    [[2]]
+    [1] 2
+
+    [[3]]
+    [1] 3
+
+    [1] "list"
+    [1] "List to Vector (via unlist, with coercion):"
+       num1    num2    num3    char1    char2    logic
+       "1"     "2"     "3"     "a"      "b"   "TRUE"
+    [1] "character"
+    [1] "List to Data Frame:"
+      Name Age Score
+    1    X  25    88
+    2    Y  30    92
+    3    Z  22    75
+    [1] "data.frame"
+    ```
+
+---
+
+### **4. Data Frame Conversions**
+
+* **Data Frame to Matrix:** `as.matrix()` (all columns will be coerced to a single type)
+* **Data Frame to List:** `as.list()` (each column becomes a list element)
+* **Data Frame to Vector:** `as.vector(unlist(your_dataframe))` (coerces all to single type)
+
+    **Code Snippets:**
+
+    ```r
+    my_data_frame <- data.frame(
+        ID = 1:3,
+        Category = c("A", "B", "C"),
+        Value = c(10.5, 20.3, 15.0),
+        stringsAsFactors = FALSE
+    )
+    print("Original Data Frame:")
+    print(my_data_frame)
+
+    # Data Frame to Matrix (all elements coerced to character)
+    matrix_from_df <- as.matrix(my_data_frame)
+    print("Data Frame to Matrix (all elements become character):")
+    print(matrix_from_df)
+    print(class(matrix_from_df))
+
+    # Data Frame to List (each column becomes a list element)
+    list_from_df <- as.list(my_data_frame)
+    print("Data Frame to List:")
+    print(list_from_df)
+    print(class(list_from_df))
+    print(class(list_from_df$ID)) # Check type of list elements
+
+    # Data Frame to Vector (flattened, all coerced)
+    vector_from_df <- as.vector(unlist(my_data_frame))
+    print("Data Frame to Vector (flattened, all coerced):")
+    print(vector_from_df)
+    print(class(vector_from_df)) # All elements become character
+    ```
+
+    **Output:**
+
+    ```bash
+    [1] "Original Data Frame:"
+      ID Category Value
+    1  1        A  10.5
+    2  2        B  20.3
+    3  3        C  15.0
+    [1] "Data Frame to Matrix (all elements become character):"
+         ID  Category Value
+    [1,] "1" "A"      "10.5"
+    [2,] "2" "B"      "20.3"
+    [3,] "3" "C"      "15"
+    [1] "matrix" "array"
+    [1] "Data Frame to List:"
+    $ID
+    [1] 1 2 3
+
+    $Category
+    [1] "A" "B" "C"
+
+    $Value
+    [1] 10.5 20.3 15.0
+
+    [1] "list"
+    [1] "integer"
+    [1] "Data Frame to Vector (flattened, all coerced):"
+         ID1      ID2      ID3 Category1 Category2 Category3     Value1
+         "1"      "2"      "3"       "A"       "B"       "C"   "10.5"
+        Value2     Value3
+        "20.3"       "15"
+    [1] "character"
+    ```
+
+---
+
+### **5. Factor Conversions**
+
+* **To Character:** `as.character()` (recommended)
+* **To Numeric:** `as.numeric(as.character())` (recommended for levels that are numbers)
+* **To Factor:** `as.factor()`
+
+    **Code Snippets:**
+
+    ```r
+    # Factor to Character
+    grade_factor <- factor(c("A", "B", "C", "A", "D"), levels = c("D", "C", "B", "A"), ordered = TRUE)
+    print("Original Grade Factor:")
+    print(grade_factor)
+    char_grade <- as.character(grade_factor)
+    print("Factor to Character:")
+    print(char_grade)
+    print(class(char_grade))
+
+    # Factor (with numeric levels as strings) to Numeric - IMPORTANT TWO-STEP PROCESS
+    response_factor <- factor(c("1", "5", "2", "1"), levels = c("1", "2", "3", "4", "5"))
+    print("Original Response Factor (numeric levels as strings):")
+    print(response_factor)
+    numeric_response <- as.numeric(as.character(response_factor))
+    print("Factor to Numeric (correctly):")
+    print(numeric_response)
+    print(class(numeric_response))
+
+    # Numeric/Character to Factor
+    region_data <- c("East", "West", "North", "East")
+    region_factor <- as.factor(region_data)
+    print("Character to Factor:")
+    print(region_factor)
+    print(class(region_factor))
+    print(levels(region_factor))
+    ```
+
+    **Output:**
+
+    ```bash
+    [1] "Original Grade Factor:"
+    [1] A B C A D
+    Levels: D < C < B < A
+    [1] "Factor to Character:"
+    [1] "A" "B" "C" "A" "D"
+    [1] "character"
+    [1] "Original Response Factor (numeric levels as strings):"
+    [1] 1 5 2 1
+    Levels: 1 2 3 4 5
+    [1] "Factor to Numeric (correctly):"
+    [1] 1 5 2 1
+    [1] "numeric"
+    [1] "Character to Factor:"
+    [1] East  West  North East
+    Levels: East North West
+    [1] "factor"
+    [1] "East"  "North" "West"
+    ```
+
+---
+
+This lesson summarized the key R data structures and, critically, explored how to convert between them. Understanding the nuances of coercion during conversion is vital to avoid data loss or unexpected results. You now have a solid foundation in R's fundamental data structures.

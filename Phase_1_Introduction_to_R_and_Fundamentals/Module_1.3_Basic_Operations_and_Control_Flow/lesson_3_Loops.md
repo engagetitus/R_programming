@@ -6,13 +6,12 @@
 * Using `next` to skip iterations.
 * Why vectorization is preferred over loops in R.
 
-Let's continue to **Lesson 3: Loops** within **Module 1.3: Basic Operations and Control Flow**.
-
 Loops are fundamental programming constructs that allow you to execute a block of code repeatedly. They are essential when you need to perform the same operation multiple times, either for a fixed number of iterations or until a certain condition is met.
 
 ---
 
-### **Phase 1: Introduction to R and Fundamentals**
+## **Phase 1: Introduction to R and Fundamentals**
+
 ### **Module 1.3: Basic Operations and Control Flow**
 
 ---
