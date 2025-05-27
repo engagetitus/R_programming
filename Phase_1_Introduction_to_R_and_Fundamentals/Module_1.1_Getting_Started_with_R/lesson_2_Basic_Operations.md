@@ -149,7 +149,7 @@ print(is_ge_false)
 
 **Output:**
 
-```
+```bash
 [1] TRUE
 [1] FALSE
 [1] TRUE
@@ -173,10 +173,10 @@ Logical operators are used to combine logical conditions (expressions that evalu
 | Operator | Description         | Example          |
 | :------- | :------------------ | :--------------- |
 | `&`      | Element-wise AND    | `c(TRUE, FALSE) & c(TRUE, TRUE)` |
-| `|`      | Element-wise OR     | `c(TRUE, FALSE) | c(FALSE, TRUE)` |
+| `\|`      | Element-wise OR     | `c(TRUE, FALSE) \| c(FALSE, TRUE)` |
 | `!`      | Logical NOT         | `!TRUE`          |
 | `&&`     | Logical AND (scalar) | `TRUE && FALSE`  |
-| `||`     | Logical OR (scalar) | `TRUE || FALSE`  |
+| `\|\|`     | Logical OR (scalar) | `TRUE \|\| FALSE`  |
 
 **Difference between `&`/`|` and `&&`/`||`:**
 
@@ -224,7 +224,7 @@ print(numeric_or)
 
 **Output:**
 
-```
+```bash
 [1]  TRUE FALSE FALSE FALSE
 [1]  TRUE  TRUE  TRUE FALSE
 [1] FALSE
@@ -286,7 +286,7 @@ print(go_to_work)
 
 **Output:**
 
-```
+```bash
 [1]  20  40  60  80 100
 [1] 5 7 9
 [1]  11 102  13 104  15
