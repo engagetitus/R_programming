@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Lesson 3: Introduction to Packages
 
 * What are R packages and why are they important?
@@ -38,9 +43,9 @@ Before you can use a package, you need to install it onto your system. This typi
 
 **Syntax:**
 
-```{r}
+
 install.packages("package_name")
-```
+
 
 **Parameters:**
 
@@ -91,10 +96,10 @@ Installing a package makes it available on your system, but to use its functions
 
 **Syntax:**
 
-```{r}
+
 library(package_name)
 require(package_name) # Less common for interactive use
-```
+
 
 **Parameters:**
 
@@ -215,9 +220,9 @@ print("Filtered cars (using dplyr):")
 print(head(filtered_cars))
 
 # Example using ggplot2: Simple plot (won't display in text output)
-# ggplot(mtcars, aes(x = mpg, y = hp)) +
-#   geom_point() +
-#   labs(title = "MPG vs HP in mtcars") # Uncomment to create a plot in your R environment
+ggplot(mtcars, aes(x = mpg, y = hp)) +
+  geom_point() +
+   labs(title = "MPG vs HP in mtcars") # Uncomment to create a plot in your R environment
 ```
 
 

@@ -35,7 +35,7 @@ The primary function to create a matrix in R is `matrix()`.
 
 **Syntax:**
 
-```R
+```{r}
 matrix(data, nrow, ncol, byrow = FALSE, dimnames = NULL)
 ```
 
@@ -53,7 +53,7 @@ matrix(data, nrow, ncol, byrow = FALSE, dimnames = NULL)
 
 **Code Snippets:**
 
-```r
+```{r}
 # Create a simple matrix (default: filled by column)
 # Data from 1 to 9, 3 rows, 3 columns
 my_matrix_col_fill <- matrix(1:9, nrow = 3, ncol = 3)
@@ -95,34 +95,6 @@ print(coerced_matrix)
 print(class(coerced_matrix))
 ```
 
-**Output:**
-
-```
-[1] "Matrix (column-wise fill):"
-     [,1] [,2] [,3]
-[1,]    1    4    7
-[2,]    2    5    8
-[3,]    3    6    9
-[1] "Matrix (row-wise fill):"
-     [,1] [,2] [,3]
-[1,]    1    2    3
-[2,]    4    5    6
-[3,]    7    8    9
-[1] "Matrix with data recycling:"
-     [,1] [,2] [,3]
-[1,]    1    3    2
-[2,]    2    1    3
-[1] "Sales Data Matrix:"
-   East West North
-Q1  100  120   150
-Q2   80  110   130
-[1] "matrix" "array"
-[1] "Coerced Matrix (numeric and character becomes character):"
-     [,1] [,2]
-[1,] "1"  "A"
-[2,] "2"  "B"
-[1] "matrix" "array"
-```
 
 ---
 
@@ -140,7 +112,7 @@ Accessing elements or subsets of a matrix is similar to vectors, but now you nee
 
 **Code Snippets:**
 
-```r
+```{r}
 my_matrix <- matrix(1:12, nrow = 4, byrow = TRUE,
                     dimnames = list(
                         c("R1", "R2", "R3", "R4"),
@@ -190,54 +162,6 @@ print("Columns 'C1' and 'C3' (using names):")
 print(my_matrix[, c("C1", "C3")])
 ```
 
-**Output:**
-
-```
-[1] "Original Matrix:"
-   C1 C2 C3
-R1  1  2  3
-R2  4  5  6
-R3  7  8  9
-R4 10 11 12
-[1] "Element at R2, C3:"
-[1] 6
-[1] "All elements in R1:"
-C1 C2 C3
- 1  2  3
-[1] "All elements in C2:"
-R1  2
-R2  5
-R3  8
-R4 11
-[1] "Elements in R1 and R3:"
-   C1 C2 C3
-R1  1  2  3
-R3  7  8  9
-[1] "Elements in C1 and C3:"
-   C1 C3
-R1  1  3
-R2  4  6
-R3  7  9
-R4 10 12
-[1] "Sub-matrix (R2, R3 and C1, C2):"
-   C1 C2
-R2  4  5
-R3  7  8
-[1] "Rows where C1 value > 5:"
-   C1 C2 C3
-R3  7  8  9
-R4 10 11 12
-[1] "Elements > 7 (vector):"
-[1]  8  9 10 11 12
-[1] "Element at 'R4', 'C1' (using names):"
-[1] 10
-[1] "Columns 'C1' and 'C3' (using names):"
-   C1 C3
-R1  1  3
-R2  4  6
-R3  7  9
-R4 10 12
-```
 
 **Key Points:**
 
@@ -259,7 +183,7 @@ R provides a variety of built-in functions and operators for performing operatio
 
 **Code Snippets:**
 
-```r
+```{r}
 matrix_A <- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
 matrix_B <- matrix(c(5, 6, 7, 8), nrow = 2, byrow = TRUE)
 
@@ -318,62 +242,6 @@ print("Product of Matrix and its Inverse:")
 print(invertible_matrix %*% solve(invertible_matrix))
 ```
 
-**Output:**
-
-```
-[1] "Matrix A:"
-     [,1] [,2]
-[1,]    1    2
-[2,]    3    4
-[1] "Matrix B:"
-     [,1] [,2]
-[1,]    5    6
-[2,]    7    8
-[1] "Element-wise Addition (A + B):"
-     [,1] [,2]
-[1,]    6    8
-[2,]   10   12
-[1] "Element-wise Multiplication (A * B):"
-     [,1] [,2]
-[1,]    5   12
-[2,]   21   32
-[1] "Matrix Multiplication (A %*% B):"
-     [,1] [,2]
-[1,]   19   22
-[2,]   43   50
-[1] "Transpose of A:"
-     [,1] [,2]
-[1,]    1    3
-[2,]    2    4
-[1] "Number of rows in A:"
-[1] 2
-[1] "Number of columns in B:"
-[1] 2
-[1] "Dimensions of A (rows, columns):"
-[1] 2 2
-[1] "Row-bound matrix (A and C):"
-     [,1] [,2]
-[1,]    1    2
-[2,]    3    4
-[3,]    9   10
-[1] "Column-bound matrix (A and D):"
-     [,1] [,2] [,3]
-[1,]    1    2   11
-[2,]    3    4   12
-[1] "Invertible Matrix:"
-     [,1] [,2]
-[1,]    4    7
-[2,]    2    6
-[1] "Inverse of Invertible Matrix:"
-          [,1]      [,2]
-[1,]  0.4285714 -0.5000000
-[2,] -0.1428571  0.2857143
-[1] "Product of Matrix and its Inverse:"
-              [,1]          [,2]
-[1,]  1.000000e+00 -5.551115e-17
-[2,]  0.000000e+00  1.000000e+00
-```
-
 **Key Points:**
 
 * Be careful to distinguish between element-wise multiplication (`*`) and true matrix multiplication (`%*%`).
@@ -396,7 +264,7 @@ The primary function to create an array is `array()`.
 
 **Syntax:**
 
-```R
+```{r}
 array(data, dim = length(data), dimnames = NULL)
 ```
 
@@ -412,7 +280,7 @@ array(data, dim = length(data), dimnames = NULL)
 
 **Code Snippets:**
 
-```r
+```{r}
 # Create a 3-dimensional array
 # Data from 1 to 24
 # Dimensions: 2 rows, 3 columns, 4 layers (or "sheets")
@@ -450,66 +318,6 @@ print("Sales for Product B in Q2 (all regions):")
 print(product_sales_array["B", , "Q2"])
 ```
 
-**Output:**
-
-```
-[1] "My 3D Array:"
-, , 1
-
-     [,1] [,2] [,3]
-[1,]    1    3    5
-[2,]    2    4    6
-
-, , 2
-
-     [,1] [,2] [,3]
-[1,]    7    9   11
-[2,]    8   10   12
-
-, , 3
-
-     [,1] [,2] [,3]
-[1,]   13   15   17
-[2,]   14   16   18
-
-, , 4
-
-     [,1] [,2] [,3]
-[1,]   19   21   23
-[2,]   20   22   24
-
-[1] "Element at [1, 2, 3]:"
-[1] 15
-[1] "Second layer of the array:"
-     [,1] [,2] [,3]
-[1,]    7    9   11
-[2,]    8   10   12
-[1] "First row across all layers:"
-    [,1] [,2] [,3] [,4]
-[1,]   1    3    5    7
-[2,]   9   11   13   15
-[3,]   17   19   21   23
-[1] "Product Sales Array:"
-, , Q1
-
-         Regions
-Products North South
-       A    10    25
-       B    15    30
-       C    20    35
-
-, , Q2
-
-         Regions
-Products North South
-       A    40    55
-       B    45    60
-       C    50    65
-
-[1] "Sales for Product B in Q2 (all regions):"
-  North South
-     45    60
-```
 
 **Key Points:**
 

@@ -222,14 +222,16 @@ print(class(my_integer))
 print(class(my_double))
 print(class(my_character))
 print(class(my_logical))
-
-# Check their internal storage types
+```
+```{r}
+#### Check their internal storage types
 print(typeof(my_integer))
 print(typeof(my_double))
 print(typeof(my_character))
 print(typeof(my_logical))
-
-# Print their values
+```
+```{r}
+#### Print their values
 print(my_integer)
 print(my_double)
 print(my_character)
@@ -237,8 +239,9 @@ print(my_logical)
 
 # List objects in the environment
 print(ls())
-
-# Remove a variable
+```
+```{r}
+#### Remove a variable
 rm(my_character)
 print(ls()) # my_character should be gone
 

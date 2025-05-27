@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Lesson 1: Built-in Functions
 
 * Understanding the purpose and usage of common built-in R functions (e.g., `mean()`, `sum()`, `max()`, `min()`, `length()`).
@@ -40,37 +45,50 @@ These functions are used for basic mathematical calculations on numeric data.
 numbers <- c(10, 25, 5, 30, 15, NA, 20)
 
 print("--- Common Mathematical Functions ---")
+```
+#### sum()
+```{r}
 
-# sum()
 print(paste("1. Sum of numbers:", sum(numbers, na.rm = TRUE))) # na.rm=TRUE removes NA for calculation
 print(paste("   Sum of numbers (without na.rm):", sum(numbers)))
+```
+#### mean()
+```{r}
 
-# mean()
 print(paste("2. Mean of numbers:", mean(numbers, na.rm = TRUE)))
 print(paste("   Mean of numbers (without na.rm):", mean(numbers)))
-
-# median()
+```
+#### median()
+```{r}
 print(paste("3. Median of numbers:", median(numbers, na.rm = TRUE)))
+```
+#### min()
+```{r}
 
-# min()
 print(paste("4. Minimum number:", min(numbers, na.rm = TRUE)))
+```
+#### max()
+```{r}
 
-# max()
 print(paste("5. Maximum number:", max(numbers, na.rm = TRUE)))
-
-# sqrt()
+```
+#### sqrt()
+```{r}
 positive_num <- 16
 print(paste("6. Square root of", positive_num, ":", sqrt(positive_num)))
 vec_for_sqrt <- c(4, 9, 25)
 print(paste("   Square roots of c(4,9,25):", paste(sqrt(vec_for_sqrt), collapse = ", ")))
-
-# abs()
+```
+#### abs()
+```{r}
 negative_num <- -7.5
 print(paste("7. Absolute value of", negative_num, ":", abs(negative_num)))
 vec_for_abs <- c(-10, 5, -2)
 print(paste("   Absolute values of c(-10,5,-2):", paste(abs(vec_for_abs), collapse = ", ")))
+```
+#### round()
+```{r}
 
-# round()
 decimal_num <- 12.3456
 print(paste("8. Round 12.3456 to 2 decimal places:", round(decimal_num, digits = 2)))
 print(paste("   Round 12.3456 to nearest integer:", round(decimal_num)))
@@ -95,15 +113,19 @@ data_points <- c(10, 12, 15, 13, 18, 11, 14)
 scores_with_na <- c(85, 92, 78, NA, 65, 95, 88)
 
 print("--- Statistical Functions ---")
+```
+#### sd() - Standard Deviation
+```{r}
 
-# sd() - Standard Deviation
 print(paste("1. Standard deviation of data_points:", round(sd(data_points), 2)))
 print(paste("   Standard deviation of scores_with_na (na.rm=TRUE):", round(sd(scores_with_na, na.rm = TRUE), 2)))
-
-# var() - Variance
+```
+#### var() - Variance
+```{r}
 print(paste("2. Variance of data_points:", round(var(data_points), 2)))
-
-# summary() - Provides a statistical summary
+```
+#### summary() - Provides a statistical summary
+```{r}
 print("3. Summary of data_points:")
 summary(data_points)
 print("   Summary of a data frame:")
@@ -114,8 +136,10 @@ my_df <- data.frame(
     stringsAsFactors = FALSE
 )
 summary(my_df)
+```
 
 # quantile()
+```{r}
 print("4. Quantiles of data_points:")
 print(quantile(data_points)) # Default quantiles (0%, 25%, 50%, 75%, 100%)
 print("   Specific quantiles (10%, 90%):")
@@ -141,31 +165,37 @@ names_vec <- c("Alice", "Bob", "Charlie", "David")
 sentence <- "R is a powerful statistical language, R is great."
 
 print("--- Character Manipulation Functions ---")
-
+```
 # nchar()
+```{r}
 print(paste("1. Number of characters in '", text1, "':", nchar(text1)))
 print(paste("   Characters in names_vec:", paste(nchar(names_vec), collapse = ", ")))
-
-# paste() / paste0()
+```
+#### paste() / paste0()
+```{r}
 combined_text_space <- paste("Welcome", "to", "R")
 print(paste("2. Using paste() (default sep=' '):", combined_text_space))
 combined_text_no_space <- paste0("Welcome", "to", "R")
 print(paste("   Using paste0() (no separator):", combined_text_no_space))
 combined_with_sep <- paste("Item", 1:3, sep = "-")
 print(paste("   Paste with separator (sep='-'):", paste(combined_with_sep, collapse = ", ")))
-
-# grep() - find elements matching a pattern
+```
+```{r}
+#### grep() - find elements matching a pattern
 # Returns indices by default, use value=TRUE to get the values
 search_results_idx <- grep("a", names_vec)
 print(paste("3. Indices of names containing 'a':", paste(search_results_idx, collapse = ", ")))
 search_results_val <- grep("a", names_vec, value = TRUE)
-print(paste("   Names containing 'a':", paste(search_results_val, collapse = ", ")))
+print(paste("Names containing 'a':", paste(search_results_val, collapse = ", ")))
+```
+#### sub() - replace first occurrence
+```{r}
 
-# sub() - replace first occurrence
 replaced_first <- sub("R", "Python", sentence)
 print(paste("4. Replace first 'R' with 'Python':", replaced_first))
-
-# gsub() - replace all occurrences
+```
+#### gsub() - replace all occurrences
+```{r}
 replaced_all <- gsub("R", "Python", sentence)
 print(paste("5. Replace all 'R' with 'Python':", replaced_all))
 ```
@@ -186,51 +216,63 @@ These functions are used to get information about or manipulate vectors and matr
 * `cbind()`: Combines vectors, matrices, or data frames by columns.
 
 **Code Snippets:**
+#### Create vectors and matrices for examples
 
 ```{r}
-# Create vectors and matrices for examples
 my_vec <- c(10, 20, 30, 40, 50)
 my_matrix <- matrix(1:9, nrow = 3, byrow = TRUE)
 vec_to_combine_1 <- c("A", "B")
 vec_to_combine_2 <- c("C", "D")
 
 print("--- Vector/Matrix Manipulation Functions ---")
+```
 
 # length()
+```{r}
 print(paste("1. Length of my_vec:", length(my_vec)))
+```
+#### dim()
+```{r}
 
-# dim()
 print("2. Dimensions of my_matrix (rows, cols):")
 print(dim(my_matrix))
+```
+#### nrow()
+```{r}
 
-# nrow()
 print(paste("3. Number of rows in my_matrix:", nrow(my_matrix)))
+```
+#### ncol()
+```{r}
 
-# ncol()
 print(paste("4. Number of columns in my_matrix:", ncol(my_matrix)))
-
-# t() - Transpose
+```
+#### t() - Transpose
+```{r}
 print("5. Original Matrix:")
 print(my_matrix)
 print("   Transposed Matrix:")
 print(t(my_matrix))
-
-# c() - Combine elements (coerces to common type)
+```
+#### c() - Combine elements (coerces to common type)
+```{r}
 combined_vec <- c(my_vec, 60, 70)
 print(paste("6. Combined vector (c()):", paste(combined_vec, collapse = ", ")))
 mixed_type_c <- c(1, "hello", TRUE) # Coerces all to character
 print(paste("   Mixed type combined with c():", paste(mixed_type_c, collapse = ", ")))
 print(paste("   Class of mixed_type_c:", class(mixed_type_c)))
 
-
+```
 # rbind() - Row bind (combines by rows)
+```{r}
 row1 <- c(1, 2, 3)
 row2 <- c(4, 5, 6)
 combined_rows <- rbind(row1, row2)
 print("7. Row-bound matrix:")
 print(combined_rows)
-
+```
 # cbind() - Column bind (combines by columns)
+```{r}
 col1 <- c(10, 20)
 col2 <- c(30, 40)
 combined_cols <- cbind(col1, col2)
@@ -253,9 +295,8 @@ These functions are particularly useful for inspecting and working with data fra
 * `rownames()`: Gets or sets the row names of a data frame.
 
 **Code Snippets:**
-
+#### Create a data frame for examples
 ```{r}
-# Create a data frame for examples
 employee_data <- data.frame(
     EmpID = c("E001", "E002", "E003", "E004", "E005"),
     Name = c("John", "Jane", "Peter", "Mary", "Chris"),
@@ -268,24 +309,31 @@ employee_data <- data.frame(
 print("--- Data Frame Specific Functions ---")
 print("Original Data Frame:")
 print(employee_data)
-
+```
 # head()
+```{r}
 print("1. First 3 rows of employee_data:")
 print(head(employee_data, n = 3))
-
-# tail()
+```
+#### tail()
+```{r}
 print("2. Last 2 rows of employee_data:")
 print(tail(employee_data, n = 2))
-
-# str()
+```
+#### str()
+```{r}
 print("3. Structure of employee_data (str()):")
 str(employee_data)
+```
 
 # summary()
+```{r}
 print("4. Summary of employee_data:")
 summary(employee_data)
+```
 
 # colnames() - Get column names
+```{r}
 print("5. Column names of employee_data:")
 print(colnames(employee_data))
 # colnames() - Set column names (example: rename 'YearsExp')
@@ -294,8 +342,9 @@ print("   Updated column names:")
 print(colnames(employee_data))
 print("   Data frame with updated column name:")
 print(employee_data) # Show effect of renaming
-
+```
 # rownames() - Get row names (usually just numbers by default)
+```{r}
 print("6. Row names of employee_data:")
 print(rownames(employee_data))
 # rownames() - Set row names (e.g., to EmpID)

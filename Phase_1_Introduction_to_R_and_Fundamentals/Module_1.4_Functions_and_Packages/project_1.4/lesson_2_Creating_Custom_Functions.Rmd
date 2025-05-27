@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Lesson 2: Creating Custom Functions
 
 * Defining your own functions using the `function()` keyword.
@@ -116,8 +121,9 @@ print(paste("Sum of 10 and 5:", result1))
 
 result2 <- add_numbers(num1 = 20, num2 = 15) # Can use named arguments for clarity
 print(paste("Sum of 20 and 15:", result2))
-
-# Example 3: Function returning the last evaluated expression (implicit return)
+```
+```{r}
+#### Example 3: Function returning the last evaluated expression (implicit return)
 multiply_numbers <- function(x, y) {
   x * y # The result of this expression will be returned
 }
@@ -182,8 +188,9 @@ data_with_na <- c(10, 20, 30, NA, 40)
 # Call without handling NA (mean will be NA)
 mean_no_na_rm <- calculate_mean_with_options(data_with_na)
 print(paste("Mean (no na.rm):", mean_no_na_rm))
-
-# Call with na.rm = TRUE passed via '...'
+```
+```{r}
+#### Call with na.rm = TRUE passed via '...'
 mean_with_na_rm <- calculate_mean_with_options(data_with_na, na.rm = TRUE)
 print(paste("Mean (with na.rm=TRUE):", mean_with_na_rm))
 ```
@@ -219,16 +226,18 @@ print(paste("Area of circle with radius 5:", round(area1, 2)))
 
 area2 <- calculate_area_circle(-2) # This will trigger the warning
 print(paste("Area of circle with radius -2:", area2))
-
-# Example 2: Implicit return (last expression)
+```
+```{r}
+#### Example 2: Implicit return (last expression)
 get_full_name <- function(first_name, last_name) {
   paste(first_name, last_name) # This is the last expression, its result is returned
 }
 
 full_name <- get_full_name("Jane", "Doe")
 print(paste("Full name (implicit return):", full_name))
-
-# Example 3: Returning multiple values (using a list)
+```
+```{r}
+#### Example 3: Returning multiple values (using a list)
 get_stats <- function(numbers) {
   avg <- mean(numbers, na.rm = TRUE)
   std_dev <- sd(numbers, na.rm = TRUE)
@@ -380,8 +389,9 @@ print(paste("Trimmed mean of", paste(data_set, collapse = ", "), ":", round(mean
 data_set_with_na <- c(10, 20, 30, 40, NA, 50)
 mean_no_na <- calculate_trimmed_mean(data_set_with_na, na.rm = FALSE) # Will warn and return NA
 print(paste("Trimmed mean (na.rm=FALSE):", mean_no_na))
-
-# Try invalid input to see error handling
+```
+```{r}
+#### Try invalid input to see error handling
 # calculate_trimmed_mean("not numeric") # Uncomment to see error
 # calculate_trimmed_mean(data_set, trim = 0.6) # Uncomment to see error
 ```

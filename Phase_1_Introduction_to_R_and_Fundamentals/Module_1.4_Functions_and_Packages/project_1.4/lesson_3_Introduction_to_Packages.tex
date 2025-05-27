@@ -1,0 +1,641 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\section{Lesson 3: Introduction to
+Packages}\label{lesson-3-introduction-to-packages}
+
+\begin{itemize}
+\tightlist
+\item
+  What are R packages and why are they important?
+\item
+  Installing packages from CRAN (\texttt{install.packages()}).
+\item
+  Loading packages into your R session (\texttt{library()},
+  \texttt{require()}).
+\item
+  Exploring package documentation.
+\end{itemize}
+
+While R's base installation is powerful, its true strength lies in its
+extensibility through \textbf{packages}. Packages are collections of
+functions, data, and compiled code in a well-defined format, designed to
+extend R's capabilities for specific tasks. They are the primary way the
+R community shares reusable code and functionalities.
+
+\subsection{\texorpdfstring{\textbf{Phase 1: Introduction to R and
+Fundamentals}}{Phase 1: Introduction to R and Fundamentals}}\label{phase-1-introduction-to-r-and-fundamentals}
+
+\subsubsection{\texorpdfstring{\textbf{Module 1.4: Functions and
+Packages}}{Module 1.4: Functions and Packages}}\label{module-1.4-functions-and-packages}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{\texorpdfstring{\textbf{Lesson 3: Introduction to
+Packages}}{Lesson 3: Introduction to Packages}}\label{lesson-3-introduction-to-packages-1}
+
+This lesson will introduce you to the concept of R packages, why they
+are indispensable for data analysis, and how to effectively manage them.
+You'll learn how to install, load, and find packages, as well as get an
+overview of some of the most commonly used and powerful packages in the
+R ecosystem.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{1. What are R Packages and Why are
+They
+Used?}}{1. What are R Packages and Why are They Used?}}\label{what-are-r-packages-and-why-are-they-used}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Definition:} An R package is a collection of
+  \texttt{functions}, data, and documentation that extends the
+  capabilities of R's base system. Think of them as add-ons or plugins
+  for R.
+\item
+  \textbf{Purpose:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Extend Functionality:} Provide specialized tools for
+    statistics, machine learning, visualization, data manipulation, web
+    scraping, and more.
+  \item
+    \textbf{Code Reusability:} Prevent users from reinventing the wheel
+    by providing pre-written, tested, and optimized code for common
+    tasks.
+  \item
+    \textbf{Community Contribution:} Allow R users and developers
+    worldwide to share their work and contribute to the R ecosystem.
+  \item
+    \textbf{Organization:} Group related functions and data together,
+    making them easier to discover and use.
+  \end{itemize}
+\end{itemize}
+
+R's core functionality is powerful, but packages are what truly make R a
+versatile tool for almost any data-related task. The Comprehensive R
+Archive Network (CRAN) hosts over 20,000 packages, with thousands more
+available elsewhere (e.g., Bioconductor, GitHub).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{2. Installing Packages
+(\texttt{install.packages()})}}{2. Installing Packages (install.packages())}}\label{installing-packages-install.packages}
+
+Before you can use a package, you need to install it onto your system.
+This typically only needs to be done once per package on a given R
+installation.
+
+\textbf{Syntax:}
+
+install.packages(``package\_name'')
+
+\textbf{Parameters:}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{"package\_name"}: A character string specifying the name of
+  the package you want to install. It \textbf{must} be enclosed in
+  quotes.
+\end{itemize}
+
+\textbf{Important Notes:}
+
+\begin{itemize}
+\tightlist
+\item
+  You need an active internet connection to install packages from CRAN.
+\item
+  You might be prompted to choose a CRAN mirror (a server from which to
+  download). Choose one geographically close to you for faster
+  downloads.
+\item
+  \texttt{install.packages()} downloads the package from CRAN (or
+  another specified repository) and places it in your R library folder.
+\end{itemize}
+
+\textbf{Code Snippets:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"{-}{-}{-} Installing Packages {-}{-}{-}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "--- Installing Packages ---"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example: Installing a popular data manipulation package, \textquotesingle{}dplyr\textquotesingle{}}
+\CommentTok{\# If you\textquotesingle{}ve installed it before, R will usually just say it\textquotesingle{}s already installed.}
+\CommentTok{\# It\textquotesingle{}s good practice to check if it\textquotesingle{}s installed first, though for a learning}
+\CommentTok{\# environment, simply running install.packages() is fine.}
+
+\CommentTok{\# You can check if a package is installed:}
+\CommentTok{\# if (!requireNamespace("dplyr", quietly = TRUE)) \{}
+\CommentTok{\#   install.packages("dplyr")}
+\CommentTok{\# \}}
+
+\CommentTok{\# Let\textquotesingle{}s install a less common example for demonstration without affecting}
+\CommentTok{\# your existing setup too much, or use a package that is commonly used.}
+\CommentTok{\# \textquotesingle{}stringr\textquotesingle{} is a good basic text manipulation package.}
+
+\CommentTok{\# Installing \textquotesingle{}stringr\textquotesingle{}}
+\CommentTok{\# install.packages("stringr") \# Uncomment to run}
+
+\CommentTok{\# To see where packages are installed (your R library paths):}
+\FunctionTok{print}\NormalTok{(}\StringTok{"Your R library paths:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Your R library paths:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{.libPaths}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C:/Users/Titus/AppData/Local/R/win-library/4.4"
+## [2] "C:/Program Files/R/R-4.4.3/library"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Installation successful (or package already installed) if no errors occurred."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Installation successful (or package already installed) if no errors occurred."
+\end{verbatim}
+
+\paragraph{\texorpdfstring{\textbf{3. Loading Packages
+(\texttt{library()},
+\texttt{require()})}}{3. Loading Packages (library(), require())}}\label{loading-packages-library-require}
+
+Installing a package makes it available on your system, but to use its
+functions in your current R session, you must \textbf{load} it. This
+typically needs to be done at the beginning of each R session where you
+intend to use functions from that package.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{library(package\_name)}: The most common and recommended way
+  to load a package. It loads the package into your current R session.
+  If the package isn't found, it will produce an error and stop
+  execution.
+\item
+  \texttt{require(package\_name)}: Similar to \texttt{library()}, but it
+  returns \texttt{TRUE} if the package is successfully loaded and
+  \texttt{FALSE} if not (without stopping execution). It's often used
+  within functions or scripts where you want to conditionally load a
+  package or check for its availability.
+\end{itemize}
+
+\textbf{Syntax:}
+
+library(package\_name) require(package\_name) \# Less common for
+interactive use
+
+\textbf{Parameters:}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{package\_name}: The name of the package to load. \textbf{No
+  quotes are generally needed} for \texttt{library()} or
+  \texttt{require()}, although they work with quotes too.
+\end{itemize}
+
+\textbf{Code Snippets:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"{-}{-}{-} Loading Packages {-}{-}{-}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "--- Loading Packages ---"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Let\textquotesingle{}s use the \textquotesingle{}stringr\textquotesingle{} package which you might have installed in the previous step}
+\CommentTok{\# or is likely already installed on most R installations.}
+
+\CommentTok{\# Load the stringr package}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{print}\NormalTok{(}\StringTok{"stringr package loaded using library()."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "stringr package loaded using library()."
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Now you can use functions from stringr, e.g., str\_length()}
+\NormalTok{text\_data }\OtherTok{\textless{}{-}} \StringTok{"Introduction to R Packages"}
+\NormalTok{char\_count }\OtherTok{\textless{}{-}} \FunctionTok{str\_length}\NormalTok{(text\_data)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Number of characters in \textquotesingle{}"}\NormalTok{, text\_data, }\StringTok{"\textquotesingle{}:"}\NormalTok{, char\_count))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Number of characters in ' Introduction to R Packages ': 26"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Using require()}
+\CommentTok{\# Usually used in conditional checks, e.g.,}
+\CommentTok{\# if (require(ggplot2)) \{}
+\CommentTok{\#   print("ggplot2 is available and loaded.")}
+\CommentTok{\# \} else \{}
+\CommentTok{\#   print("ggplot2 is not available. Please install it.")}
+\CommentTok{\# \}}
+
+\CommentTok{\# Example of a package that might not be installed, to demonstrate require()}
+\CommentTok{\# This will likely return FALSE and print the \textquotesingle{}else\textquotesingle{} message}
+\ControlFlowTok{if}\NormalTok{ (}\FunctionTok{require}\NormalTok{(nonexistentpackage123, }\AttributeTok{quietly =} \ConstantTok{TRUE}\NormalTok{)) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"nonexistentpackage123 is available and loaded."}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"nonexistentpackage123 is not available or could not be loaded."}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "nonexistentpackage123 is not available or could not be loaded."
+\end{verbatim}
+
+\textbf{Note:} Once a package is loaded, its functions are available
+directly by name. If two loaded packages have functions with the same
+name, R will use the one from the package loaded \emph{last}. You can
+always explicitly specify a function's package using
+\texttt{package\_name::function\_name()}. For example,
+\texttt{dplyr::filter()} if you want to ensure you're using
+\texttt{dplyr}'s filter function.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{4. Finding and Exploring
+Packages}}{4. Finding and Exploring Packages}}\label{finding-and-exploring-packages}
+
+The R community has created an enormous number of packages. Knowing
+where to find them and how to explore their functionalities is crucial.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{CRAN (Comprehensive R Archive Network):} The official
+  repository for R packages.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Website:} \url{https://cran.r-project.org/web/packages/}
+  \item
+    You can browse packages by name, task view (e.g., ``Machine
+    Learning'', ``Time Series''), or author. Each package has a
+    dedicated page with a description, downloads, and links to
+    documentation.
+  \end{itemize}
+\item
+  \textbf{Bioconductor:} A specialized repository for bioinformatics and
+  computational biology packages.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Website:} \url{https://www.bioconductor.org/}
+  \end{itemize}
+\item
+  \textbf{GitHub:} Many developers host packages on GitHub before or
+  instead of submitting to CRAN. You can install directly from GitHub
+  using the \texttt{install\_github()} function from the
+  \texttt{devtools} package.
+\item
+  \textbf{R Documentation:} Once a package is loaded, you can access its
+  documentation:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{?function\_name}: Opens the help page for a specific
+    function.
+  \item
+    \texttt{help(package\ =\ "package\_name")}: Opens the main help page
+    for the entire package.
+  \item
+    \texttt{example(function\_name)}: Runs the examples provided in the
+    function's help page.
+  \end{itemize}
+\end{itemize}
+
+\textbf{Code Snippets:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"{-}{-}{-} Finding and Exploring Packages {-}{-}{-}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "--- Finding and Exploring Packages ---"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Access help for a function (e.g., from base R)}
+\CommentTok{\# ?mean \# Uncomment to open help page for \textquotesingle{}mean\textquotesingle{}}
+
+\CommentTok{\# Access help for a function from a loaded package (e.g., stringr::str\_length)}
+\CommentTok{\# ?str\_length \# Uncomment to open help page for \textquotesingle{}str\_length\textquotesingle{}}
+
+\CommentTok{\# View all functions/objects in a loaded package}
+\CommentTok{\# ls("package:stringr") \# Uncomment to list all objects in stringr namespace}
+
+\CommentTok{\# Run examples from a function\textquotesingle{}s help page}
+\CommentTok{\# example(str\_length) \# Uncomment to run examples for str\_length}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Expected (if uncommented):} (Output would appear in R's help
+viewer or console)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{5. Commonly Used
+Packages}}{5. Commonly Used Packages}}\label{commonly-used-packages}
+
+Here are some essential R packages that are widely used in data science
+and analysis:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\texttt{dplyr} (part of \texttt{tidyverse}):} For data
+  manipulation (filtering, selecting, arranging, summarizing, mutating
+  data frames). It provides a consistent and intuitive set of ``verbs''
+  for data wrangling.
+\item
+  \textbf{\texttt{ggplot2} (part of \texttt{tidyverse}):} For data
+  visualization. It implements a ``grammar of graphics,'' allowing you
+  to build complex and beautiful plots layer by layer.
+\item
+  \textbf{\texttt{readr} (part of \texttt{tidyverse}):} For fast and
+  friendly reading of rectangular data (CSV, TSV, etc.). Often faster
+  and more robust than base R \texttt{read.csv()}.
+\item
+  \textbf{\texttt{tidyr} (part of \texttt{tidyverse}):} For ``tidying''
+  data, making it easier to work with. Functions like
+  \texttt{pivot\_wider()} and \texttt{pivot\_longer()} are key for
+  reshaping data.
+\item
+  \textbf{\texttt{purrr} (part of \texttt{tidyverse}):} For functional
+  programming, making it easier to work with lists and apply functions
+  iteratively.
+\item
+  \textbf{\texttt{lubridate} (part of \texttt{tidyverse}):} For working
+  with dates and times.
+\item
+  \textbf{\texttt{stringr} (part of \texttt{tidyverse}):} For consistent
+  and convenient string manipulation.
+\item
+  \textbf{\texttt{forcats} (part of \texttt{tidyverse}):} For working
+  with factors (categorical variables).
+\item
+  \textbf{\texttt{data.table}:} An extremely fast and memory-efficient
+  package for data manipulation, particularly for very large datasets.
+  It has a different syntax compared to \texttt{dplyr}.
+\item
+  \textbf{\texttt{caret}:} For machine learning workflows
+  (Classification And REgression Training). Provides a unified interface
+  for many machine learning models.
+\item
+  \textbf{\texttt{Shiny}:} For building interactive web applications
+  directly from R.
+\end{itemize}
+
+\textbf{The \texttt{tidyverse}:} Many of these commonly used packages
+(\texttt{dplyr}, \texttt{ggplot2}, \texttt{readr}, \texttt{tidyr},
+\texttt{purrr}, \texttt{stringr}, \texttt{forcats}, \texttt{lubridate})
+are part of a larger ecosystem called the \texttt{tidyverse}. Installing
+\texttt{install.packages("tidyverse")} will install all of them at once.
+Loading \texttt{library(tidyverse)} will load the core
+\texttt{tidyverse} packages.
+
+\textbf{Code Snippets (Illustrating \texttt{tidyverse} usage):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install tidyverse (if you haven\textquotesingle{}t already {-} this can take a few minutes)}
+\CommentTok{\# install.packages("tidyverse") \# Uncomment to run}
+
+\CommentTok{\# Load the tidyverse (this loads dplyr, ggplot2, readr, etc.)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v purrr     1.0.4
+## v forcats   1.0.0     v readr     2.1.5
+## v ggplot2   3.5.2     v tibble    3.2.1
+## v lubridate 1.9.4     v tidyr     1.3.1
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"tidyverse loaded (dplyr, ggplot2, readr, etc. are now available)."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "tidyverse loaded (dplyr, ggplot2, readr, etc. are now available)."
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example using dplyr: Filtering a built{-}in dataset}
+\CommentTok{\# mtcars is a built{-}in dataset in R}
+\NormalTok{filtered\_cars }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(cyl }\SpecialCharTok{==} \DecValTok{4} \SpecialCharTok{\&}\NormalTok{ gear }\SpecialCharTok{==} \DecValTok{4}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(mpg, hp, wt)}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"Filtered cars (using dplyr):"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Filtered cars (using dplyr):"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(filtered\_cars))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 mpg hp    wt
+## Datsun 710     22.8 93 2.320
+## Merc 240D      24.4 62 3.190
+## Merc 230       22.8 95 3.150
+## Fiat 128       32.4 66 2.200
+## Honda Civic    30.4 52 1.615
+## Toyota Corolla 33.9 65 1.835
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example using ggplot2: Simple plot (won\textquotesingle{}t display in text output)}
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mpg, }\AttributeTok{y =}\NormalTok{ hp)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+   \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"MPG vs HP in mtcars"}\NormalTok{) }\CommentTok{\# Uncomment to create a plot in your R environment}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lesson_3_Introduction_to_Packages_files/figure-latex/unnamed-chunk-4-1.pdf}}
+
+This lesson provided a comprehensive introduction to R packages,
+explaining their importance, how to install and load them, and how to
+find their documentation. You also got an overview of some of the most
+widely used packages in the R ecosystem, particularly those within the
+\texttt{tidyverse}. Packages are the key to unlocking R's full potential
+for data analysis and beyond.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Module 1.4: Functions and Packages} is now complete!
+
+\textbf{Next, we will begin Phase 2: R Programming Fundamentals,
+starting with Module 2.1: Data Manipulation with \texttt{dplyr} and
+\texttt{tidyr}.}
+
+\end{document}
