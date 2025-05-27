@@ -1,0 +1,524 @@
+# Lesson 2: Matrices and Arrays
+
+* Creating matrices (`matrix()`) and understanding their dimensions.
+* Matrix indexing by row and column.
+* Basic matrix operations (addition, multiplication, transpose).
+* Brief introduction to multi-dimensional arrays.
+
+## **Phase 1: Introduction to R and Fundamentals**
+
+### **Module 1.2: Data Types and Structures**
+
+---
+
+### **Lesson 2: Matrices and Arrays**
+
+This lesson expands on atomic vectors by introducing you to **matrices** and **arrays**. Matrices are two-dimensional, homogeneous data structures, crucial for linear algebra and many statistical operations. Arrays generalize this concept to any number of dimensions.
+
+---
+
+#### **Matrices: Two-Dimensional Homogeneous Data**
+
+A **matrix** in R is a two-dimensional rectangular data structure that contains elements of the *same atomic data type*. It's essentially a collection of vectors of the same length, organized into rows and columns. Matrices are fundamental for many statistical and mathematical operations in R.
+
+**Key Characteristics of Matrices:**
+
+* **Two-Dimensional:** Organized by rows and columns.
+* **Homogeneous:** All elements must be of the same data type (e.g., all numeric, all character, all logical). If you combine different types, R will coerce them to the most flexible type, similar to atomic vectors.
+* **Data Storage:** Data is stored column-wise by default.
+
+---
+
+#### **Creating Matrices**
+
+The primary function to create a matrix in R is `matrix()`.
+
+**Syntax:**
+
+```R
+matrix(data, nrow, ncol, byrow = FALSE, dimnames = NULL)
+```
+
+**Parameters:**
+
+* `data`: A vector containing the elements to be placed in the matrix. R will fill the matrix from this vector.
+* `nrow`: The desired number of rows.
+* `ncol`: The desired number of columns. (You only need to specify `nrow` or `ncol`; R can deduce the other.)
+* `byrow`: A logical value. If `TRUE`, the matrix is filled by rows. If `FALSE` (default), it's filled by columns.
+* `dimnames`: A list of two vectors specifying the row names and column names, respectively.
+
+**Return Value:**
+
+* A matrix object.
+
+**Code Snippets:**
+
+```r
+# Create a simple matrix (default: filled by column)
+# Data from 1 to 9, 3 rows, 3 columns
+my_matrix_col_fill <- matrix(1:9, nrow = 3, ncol = 3)
+print("Matrix (column-wise fill):")
+print(my_matrix_col_fill)
+
+# Create a matrix filled by row
+my_matrix_row_fill <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+print("Matrix (row-wise fill):")
+print(my_matrix_row_fill)
+
+# Create a matrix with specific dimensions, R will recycle data if insufficient
+# Recycling occurs if the length of 'data' is not a multiple of nrow * ncol
+recycled_matrix <- matrix(c(1, 2, 3), nrow = 2, ncol = 3)
+print("Matrix with data recycling:")
+print(recycled_matrix) # Data c(1,2,3,1,2,3) is used
+
+# Create a matrix with row and column names
+sales_data <- matrix(
+    c(100, 120, 150, 80, 110, 130),
+    nrow = 2,
+    ncol = 3,
+    byrow = TRUE,
+    dimnames = list(
+        c("Q1", "Q2"),       # Row names
+        c("East", "West", "North") # Column names
+    )
+)
+print("Sales Data Matrix:")
+print(sales_data)
+
+# Check the class of the matrix
+print(class(sales_data))
+
+# Example of type coercion in matrices (all elements become character)
+coerced_matrix <- matrix(c(1, 2, "A", "B"), nrow = 2)
+print("Coerced Matrix (numeric and character becomes character):")
+print(coerced_matrix)
+print(class(coerced_matrix))
+```
+
+**Output:**
+
+```
+[1] "Matrix (column-wise fill):"
+     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9
+[1] "Matrix (row-wise fill):"
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9
+[1] "Matrix with data recycling:"
+     [,1] [,2] [,3]
+[1,]    1    3    2
+[2,]    2    1    3
+[1] "Sales Data Matrix:"
+   East West North
+Q1  100  120   150
+Q2   80  110   130
+[1] "matrix" "array"
+[1] "Coerced Matrix (numeric and character becomes character):"
+     [,1] [,2]
+[1,] "1"  "A"
+[2,] "2"  "B"
+[1] "matrix" "array"
+```
+
+---
+
+#### **Matrix Indexing and Slicing**
+
+Accessing elements or subsets of a matrix is similar to vectors, but now you need to specify both row and column indices. The syntax is `matrix_name[row_index, column_index]`.
+
+**Methods of Indexing:**
+
+* **Single Element:** `matrix_name[row_number, col_number]`
+* **Entire Row/Column:** `matrix_name[row_number, ]` for a row, `matrix_name[, col_number]` for a column.
+* **Multiple Rows/Columns:** Use vectors for indices, e.g., `matrix_name[c(row1, row2), c(col1, col2)]`.
+* **Logical Indexing:** Using logical vectors or conditions.
+* **Named Indexing:** Using row and column names (if assigned).
+
+**Code Snippets:**
+
+```r
+my_matrix <- matrix(1:12, nrow = 4, byrow = TRUE,
+                    dimnames = list(
+                        c("R1", "R2", "R3", "R4"),
+                        c("C1", "C2", "C3")
+                    ))
+print("Original Matrix:")
+print(my_matrix)
+
+# 1. Accessing a single element
+print("Element at R2, C3:")
+print(my_matrix[2, 3])
+
+# 2. Accessing an entire row
+print("All elements in R1:")
+print(my_matrix[1, ])
+
+# 3. Accessing an entire column
+print("All elements in C2:")
+print(my_matrix[, 2])
+
+# 4. Accessing multiple rows
+print("Elements in R1 and R3:")
+print(my_matrix[c(1, 3), ])
+
+# 5. Accessing multiple columns
+print("Elements in C1 and C3:")
+print(my_matrix[, c(1, 3)])
+
+# 6. Accessing a sub-matrix
+print("Sub-matrix (R2, R3 and C1, C2):")
+print(my_matrix[c(2, 3), c(1, 2)])
+
+# 7. Logical Indexing
+# Select rows where the value in C1 is greater than 5
+print("Rows where C1 value > 5:")
+print(my_matrix[my_matrix[, "C1"] > 5, ])
+
+# Select elements greater than 7 (returns a vector)
+print("Elements > 7 (vector):")
+print(my_matrix[my_matrix > 7])
+
+# 8. Named Indexing
+print("Element at 'R4', 'C1' (using names):")
+print(my_matrix["R4", "C1"])
+
+print("Columns 'C1' and 'C3' (using names):")
+print(my_matrix[, c("C1", "C3")])
+```
+
+**Output:**
+
+```
+[1] "Original Matrix:"
+   C1 C2 C3
+R1  1  2  3
+R2  4  5  6
+R3  7  8  9
+R4 10 11 12
+[1] "Element at R2, C3:"
+[1] 6
+[1] "All elements in R1:"
+C1 C2 C3
+ 1  2  3
+[1] "All elements in C2:"
+R1  2
+R2  5
+R3  8
+R4 11
+[1] "Elements in R1 and R3:"
+   C1 C2 C3
+R1  1  2  3
+R3  7  8  9
+[1] "Elements in C1 and C3:"
+   C1 C3
+R1  1  3
+R2  4  6
+R3  7  9
+R4 10 12
+[1] "Sub-matrix (R2, R3 and C1, C2):"
+   C1 C2
+R2  4  5
+R3  7  8
+[1] "Rows where C1 value > 5:"
+   C1 C2 C3
+R3  7  8  9
+R4 10 11 12
+[1] "Elements > 7 (vector):"
+[1]  8  9 10 11 12
+[1] "Element at 'R4', 'C1' (using names):"
+[1] 10
+[1] "Columns 'C1' and 'C3' (using names):"
+   C1 C3
+R1  1  3
+R2  4  6
+R3  7  9
+R4 10 12
+```
+
+**Key Points:**
+
+* When you extract a single row or column, R typically "drops" the dimension and returns a vector. You can prevent this by adding `drop = FALSE` (e.g., `my_matrix[1, , drop = FALSE]`).
+* Indexing with logical vectors is very powerful for selecting elements based on conditions.
+
+---
+
+#### **Matrix Operations**
+
+R provides a variety of built-in functions and operators for performing operations on matrices.
+
+* **Arithmetic Operations:** Element-wise addition, subtraction, multiplication, division.
+* **Matrix Multiplication:** The true matrix multiplication operator (`%*%`).
+* **Transpose:** `t()`
+* **Inverse:** `solve()` (for square invertible matrices)
+* **Dimension Functions:** `nrow()`, `ncol()`, `dim()`.
+* **Binding:** `rbind()` (row bind), `cbind()` (column bind).
+
+**Code Snippets:**
+
+```r
+matrix_A <- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
+matrix_B <- matrix(c(5, 6, 7, 8), nrow = 2, byrow = TRUE)
+
+print("Matrix A:")
+print(matrix_A)
+print("Matrix B:")
+print(matrix_B)
+
+# Element-wise addition
+print("Element-wise Addition (A + B):")
+print(matrix_A + matrix_B)
+
+# Element-wise multiplication
+print("Element-wise Multiplication (A * B):")
+print(matrix_A * matrix_B)
+
+# True Matrix Multiplication (A %*% B)
+# (2x2) %*% (2x2) = (2x2)
+print("Matrix Multiplication (A %*% B):")
+print(matrix_A %*% matrix_B)
+
+# Transpose of a matrix
+print("Transpose of A:")
+print(t(matrix_A))
+
+# Dimensions of a matrix
+print("Number of rows in A:")
+print(nrow(matrix_A))
+print("Number of columns in B:")
+print(ncol(matrix_B))
+print("Dimensions of A (rows, columns):")
+print(dim(matrix_A))
+
+# Row Binding (joining matrices by rows)
+matrix_C <- matrix(c(9, 10), nrow = 1, ncol = 2)
+row_bound_matrix <- rbind(matrix_A, matrix_C)
+print("Row-bound matrix (A and C):")
+print(row_bound_matrix)
+
+# Column Binding (joining matrices by columns)
+matrix_D <- matrix(c(11, 12), nrow = 2, ncol = 1)
+col_bound_matrix <- cbind(matrix_A, matrix_D)
+print("Column-bound matrix (A and D):")
+print(col_bound_matrix)
+
+# Inverse of a matrix (only for square invertible matrices)
+# Example: Create an invertible matrix
+invertible_matrix <- matrix(c(4, 7, 2, 6), nrow = 2, byrow = TRUE)
+print("Invertible Matrix:")
+print(invertible_matrix)
+print("Inverse of Invertible Matrix:")
+print(solve(invertible_matrix))
+# Check if product of matrix and its inverse is identity matrix
+# Identity matrix should be [[1, 0], [0, 1]]
+print("Product of Matrix and its Inverse:")
+print(invertible_matrix %*% solve(invertible_matrix))
+```
+
+**Output:**
+
+```
+[1] "Matrix A:"
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+[1] "Matrix B:"
+     [,1] [,2]
+[1,]    5    6
+[2,]    7    8
+[1] "Element-wise Addition (A + B):"
+     [,1] [,2]
+[1,]    6    8
+[2,]   10   12
+[1] "Element-wise Multiplication (A * B):"
+     [,1] [,2]
+[1,]    5   12
+[2,]   21   32
+[1] "Matrix Multiplication (A %*% B):"
+     [,1] [,2]
+[1,]   19   22
+[2,]   43   50
+[1] "Transpose of A:"
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+[1] "Number of rows in A:"
+[1] 2
+[1] "Number of columns in B:"
+[1] 2
+[1] "Dimensions of A (rows, columns):"
+[1] 2 2
+[1] "Row-bound matrix (A and C):"
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+[3,]    9   10
+[1] "Column-bound matrix (A and D):"
+     [,1] [,2] [,3]
+[1,]    1    2   11
+[2,]    3    4   12
+[1] "Invertible Matrix:"
+     [,1] [,2]
+[1,]    4    7
+[2,]    2    6
+[1] "Inverse of Invertible Matrix:"
+          [,1]      [,2]
+[1,]  0.4285714 -0.5000000
+[2,] -0.1428571  0.2857143
+[1] "Product of Matrix and its Inverse:"
+              [,1]          [,2]
+[1,]  1.000000e+00 -5.551115e-17
+[2,]  0.000000e+00  1.000000e+00
+```
+
+**Key Points:**
+
+* Be careful to distinguish between element-wise multiplication (`*`) and true matrix multiplication (`%*%`).
+* `rbind()` and `cbind()` require matrices to have compatible dimensions (same number of columns for `rbind`, same number of rows for `cbind`).
+
+---
+
+#### **Arrays: Multi-Dimensional Homogeneous Data**
+
+An **array** is a generalization of a matrix to more than two dimensions. Just like matrices, arrays are homogeneous, meaning all elements must be of the same data type.
+
+**Key Characteristics of Arrays:**
+
+* **Multi-Dimensional:** Can have any number of dimensions (e.g., 3-D, 4-D, etc.).
+* **Homogeneous:** All elements must be of the same atomic type.
+
+**Creating Arrays:**
+
+The primary function to create an array is `array()`.
+
+**Syntax:**
+
+```R
+array(data, dim = length(data), dimnames = NULL)
+```
+
+**Parameters:**
+
+* `data`: A vector of values for the array.
+* `dim`: A vector specifying the dimensions of the array (e.g., `c(rows, columns, layers)` for a 3D array).
+* `dimnames`: A list of vectors providing names for each dimension.
+
+**Return Value:**
+
+* An array object.
+
+**Code Snippets:**
+
+```r
+# Create a 3-dimensional array
+# Data from 1 to 24
+# Dimensions: 2 rows, 3 columns, 4 layers (or "sheets")
+my_3d_array <- array(1:24, dim = c(2, 3, 4))
+print("My 3D Array:")
+print(my_3d_array)
+
+# Accessing elements in a 3D array: [row, column, layer]
+print("Element at [1, 2, 3]:") # 1st row, 2nd column, 3rd layer
+print(my_3d_array[1, 2, 3])
+
+# Accessing a whole layer/sheet
+print("Second layer of the array:")
+print(my_3d_array[,,2])
+
+# Accessing a specific row across all layers
+print("First row across all layers:")
+print(my_3d_array[1,,])
+
+# Create an array with named dimensions
+product_sales_array <- array(
+    c(10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65),
+    dim = c(3, 2, 2), # 3 products, 2 regions, 2 quarters
+    dimnames = list(
+        Products = c("A", "B", "C"),
+        Regions = c("North", "South"),
+        Quarter = c("Q1", "Q2")
+    )
+)
+print("Product Sales Array:")
+print(product_sales_array)
+
+# Accessing data using names
+print("Sales for Product B in Q2 (all regions):")
+print(product_sales_array["B", , "Q2"])
+```
+
+**Output:**
+
+```
+[1] "My 3D Array:"
+, , 1
+
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]    7    9   11
+[2,]    8   10   12
+
+, , 3
+
+     [,1] [,2] [,3]
+[1,]   13   15   17
+[2,]   14   16   18
+
+, , 4
+
+     [,1] [,2] [,3]
+[1,]   19   21   23
+[2,]   20   22   24
+
+[1] "Element at [1, 2, 3]:"
+[1] 15
+[1] "Second layer of the array:"
+     [,1] [,2] [,3]
+[1,]    7    9   11
+[2,]    8   10   12
+[1] "First row across all layers:"
+    [,1] [,2] [,3] [,4]
+[1,]   1    3    5    7
+[2,]   9   11   13   15
+[3,]   17   19   21   23
+[1] "Product Sales Array:"
+, , Q1
+
+         Regions
+Products North South
+       A    10    25
+       B    15    30
+       C    20    35
+
+, , Q2
+
+         Regions
+Products North South
+       A    40    55
+       B    45    60
+       C    50    65
+
+[1] "Sales for Product B in Q2 (all regions):"
+  North South
+     45    60
+```
+
+**Key Points:**
+
+* Arrays store data column-wise across dimensions by default, similar to matrices.
+* Indexing works by specifying indices for each dimension, separated by commas. Omitting an index (e.g., `[,,2]`) selects all elements along that dimension.
+* While powerful, arrays can become complex to manage as the number of dimensions increases. For most typical data analysis tasks, data frames (covered in a later lesson) are more commonly used.
+
+---
+
+This lesson introduced you to matrices and arrays, which are homogeneous, multi-dimensional data structures in R. You learned how to create, index, and perform basic operations on them. Understanding these structures is crucial for handling certain types of numerical and statistical data.
+
+**Next, we will explore Lesson 3: Lists.**
